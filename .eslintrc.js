@@ -11,6 +11,10 @@ module.exports = {
     parser: '@babel/eslint-parser'
   },
   rules: {
+    // disabilita il multi-word
+    "vue/multi-word-component-names": ["off", {
+    "ignores": []
+    }],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   }
