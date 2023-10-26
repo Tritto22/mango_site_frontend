@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-if="currentUser!=null">
         <header class="jumbotron">
             <h3>
                 <strong>{{ currentUser.username }}</strong> Profile
@@ -7,7 +7,7 @@
         </header>
         <p>
             <strong>Token:</strong>
-            {{ currentUser.accessToken.substring(0, 20) }} ... {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
+            {{ currentUser.token.substring(0, 20) }} ... {{ currentUser.token.substr(currentUser.token.length - 20) }}
         </p>
         <p>
             <strong>Id:</strong>
