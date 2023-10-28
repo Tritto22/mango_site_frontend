@@ -19,6 +19,31 @@ class UserService {
     getAdminBoard() {
         return axios.get(API_URL + 'admin', { headers: authHeader() });
     }
+
+    update(user){
+        // return axios.post(API_URL + 'user/update', {
+        //     headers: authHeader(),
+        //     username: user.username,
+        //     email: user.email,
+        //     password: user.password
+        // });
+
+        const data = {};
+
+    if (user.username !== null) {
+        data.username = user.username;
+    }
+
+    if (user.email !== null) {
+        data.email = user.email;
+    }
+
+    if (user.password !== null) {
+        data.password = user.password;
+    }
+
+    return axios.put(API_URL + 'user/update',data, { headers: authHeader() });
+    }
 }
 
 export default new UserService();

@@ -8,8 +8,7 @@
                         <label for="username">Username</label>
                         <input v-model="user.username" v-validate="'required|min:3|max:20'" type="text" class="form-control"
                             name="username" />
-                        <div v-if="submitted && errors.has('username')" class="alert-danger">{{ errors.first('username') }}
-                        </div>
+                        <div v-if="submitted && errors.has('username')" class="alert-danger">{{ errors.first('username') }}</div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>

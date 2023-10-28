@@ -1,4 +1,5 @@
 import AuthService from '../services/auth.service';
+import UserService from '../services/user.service';
 
 // Inizializza lo stato in base alla presenza di un utente nel localStorage.
 const user = JSON.parse(localStorage.getItem('user'));
@@ -40,6 +41,19 @@ export const auth = {
                     return Promise.reject(error);
                 }
             );
+        },
+        // Azione di update
+        update({commit}, user){
+            return UserService.update(user).then(
+                response => {
+                    commit('updateSuccess');
+                    return Promise.resolve(response.data);
+                },
+                error => {
+                    commit('updateFailure');
+                    return Promise.reject(error);
+                }
+            );
         }
     },
     mutations: {
@@ -65,6 +79,16 @@ export const auth = {
         // Mutazione di fallimento per la registrazione
         registerFailure(state) {
             state.status.loggedIn = false;
+        },
+        // Mutazione di successo per il login
+        updateSuccess(state, user) {
+            state.status.loggedIn = true;
+            state.user = user;
+        },
+        // Mutazione di fallimento per il login
+        updateFailure(state) {
+            state.status.loggedIn = false;
+            state.user = null;
         }
     }
 }

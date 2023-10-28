@@ -9,61 +9,67 @@ Vue.use(Router);
 export const router = new Router({
     mode: 'history',
     routes: [
-    {
-        path: '/',
-        name: 'home',
-        // component: Home
+        {
+            path: '/',
+            name: 'home',
+            // component: Home
 
-        // lazy-loaded
-        component: () => import('./components/auth/views/Home.vue')
-    },
-    {
-        path: '/home',
-        // component: Home
+            // lazy-loaded
+            component: () => import('./components/auth/views/Home.vue')
+        },
+        {
+            path: '/home',
+            // component: Home
 
-        name: 'home',
-        // lazy-loaded
-        component: () => import('./components/auth/views/Home.vue')
-    },
-    {
-        path: '/login',
-        // component: Login
+            name: 'home',
+            // lazy-loaded
+            component: () => import('./components/auth/views/Home.vue')
+        },
+        {
+            path: '/login',
+            // component: Login
 
-        name: 'login',
-        // lazy-loaded
-        component: () => import('./components/auth/views/Login.vue')
-    },
-    {
-        path: '/register',
-        // component: Register
+            name: 'login',
+            // lazy-loaded
+            component: () => import('./components/auth/views/Login.vue')
+        },
+        {
+            path: '/register',
+            // component: Register
 
-        // lazy-loaded
-        component: () => import('./components/auth/views/Register.vue')
-    },
-    {
-        path: '/profile',
-        name: 'profile',
-        // lazy-loaded
-        component: () => import('./components/auth/views/Profile.vue')
-    },
-    {
-        path: '/admin',
-        name: 'admin',
-        // lazy-loaded
-        component: () => import('./components/auth/views/BoardAdmin.vue')
-    },
-    {
-        path: '/mod',
-        name: 'moderator',
-        // lazy-loaded
-        component: () => import('./components/auth/views/BoardModerator.vue')
-    },
-    {
-        path: '/user',
-        name: 'user',
-        // lazy-loaded
-        component: () => import('./components/auth/views/BoardUser.vue')
-    }
+            // lazy-loaded
+            component: () => import('./components/auth/views/Register.vue')
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            // lazy-loaded
+            component: () => import('./components/auth/views/Profile.vue')
+        },
+        {
+            path: '/admin',
+            name: 'admin',
+            // lazy-loaded
+            component: () => import('./components/auth/views/BoardAdmin.vue')
+        },
+        {
+            path: '/mod',
+            name: 'moderator',
+            // lazy-loaded
+            component: () => import('./components/auth/views/BoardModerator.vue')
+        },
+        {
+            path: '/user',
+            name: 'user',
+            // lazy-loaded
+            component: () => import('./components/auth/views/BoardUser.vue')
+        },
+        {
+            path: '/user/update',
+            name: 'userUpdate',
+            // lazy-loaded
+            component: () => import('./components/auth/views/userCrud/UserUpdate.vue')
+        }
     ]
 });
 
