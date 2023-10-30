@@ -48,16 +48,6 @@ export default {
     computed: {
         ...mapState('auth', ['user'])
     },
-    // computed: {
-    //     loggedIn() {
-    //         return this.$store.state.auth.status.loggedIn;
-    //     }
-    // },
-    // mounted() {
-    //     if (this.loggedIn) {
-    //         this.$router.push('/user/update');
-    //     }
-    // },
     watch: {
         user: {
             handler(newValue) {

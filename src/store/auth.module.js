@@ -29,19 +29,19 @@ export const auth = {
             AuthService.logout();
             commit('logout');
         },
-        // Azione di registrazione
-        register({ commit }, user) {
-            return AuthService.register(user).then(
-                response => {
-                    commit('registerSuccess');
-                    return Promise.resolve(response.data);
-                },
-                error => {
-                    commit('registerFailure');
-                    return Promise.reject(error);
-                }
-            );
-        },
+        // // Azione di registrazione
+        // register({ commit }, user) {
+        //     return AuthService.register(user).then(
+        //         response => {
+        //             commit('registerSuccess');
+        //             return Promise.resolve(response.data);
+        //         },
+        //         error => {
+        //             commit('registerFailure');
+        //             return Promise.reject(error);
+        //         }
+        //     );
+        // },
         // Azione di update
         update({commit}, user){
             return UserService.update(user).then(
@@ -72,17 +72,17 @@ export const auth = {
             state.status.loggedIn = false;
             state.user = null;
         },
-        // Mutazione di successo per la registrazione
-        registerSuccess(state) {
-            state.status.loggedIn = false;
-        },
-        // Mutazione di fallimento per la registrazione
-        registerFailure(state) {
-            state.status.loggedIn = false;
-        },
+        // // Mutazione di successo per la registrazione
+        // registerSuccess(state) {
+        //     state.status.loggedIn = false;
+        // },
+        // // Mutazione di fallimento per la registrazione
+        // registerFailure(state) {
+        //     state.status.loggedIn = false;
+        // },
         // Mutazione di successo per il login
         updateSuccess(state, user) {
-            state.status.loggedIn = true;
+            state.status.loggedIn = false;
             state.user = user;
         },
         // Mutazione di fallimento per il login

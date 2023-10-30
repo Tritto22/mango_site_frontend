@@ -1,73 +1,79 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import Home from './views/Home.vue';
-// import Login from './views/Login.vue';
-// import Register from './views/Register.vue';
+import Home from './components/public/pages/Home.vue';
+import Galleries from './components/public/pages/Galleries.vue';
+import About from './components/public/pages/About.vue';
+import Blog from './components/public/pages/Blog.vue';
+import Contact from './components/public/pages/Contact.vue';
+import Login from './components/auth/views/Login.vue';
 
 Vue.use(Router);
 
-export const router = new Router({
+const router = new Router({
     mode: 'history',
     routes: [
+        // ****************************** PUBLIC PATH ***********************************
         {
             path: '/',
-            name: 'home',
-            // component: Home
-
-            // lazy-loaded
-            component: () => import('./components/auth/views/Home.vue')
+            name: 'public',
+            component: () => import('./components/public/pages/Home.vue'),
         },
         {
             path: '/home',
-            // component: Home
+            name: "home",
+            component: Home
+        },
+        {
+            path: "/galleries",
+            name: "galleries",
+            component: Galleries
+        },
+        {
+            path: "/about",
+            name: "about",
+            component: About
+        },
+        {
+            path: "/blog",
+            name: "blog",
+            component: Blog
+        },
+        {
+            path: "/contact",
+            name: "contact",
+            component: Contact
+        },
 
-            name: 'home',
-            // lazy-loaded
+        // ****************************** ADMIN PATH ***********************************
+
+        {
+            path: '/admin/',
+            name: 'admin',
+            component: () => import('./components/auth/views/Home.vue'),
+        },
+        {
+            path: '/admin/home',
+            name: 'admin-home',
             component: () => import('./components/auth/views/Home.vue')
         },
         {
-            path: '/login',
-            // component: Login
-
-            name: 'login',
-            // lazy-loaded
-            component: () => import('./components/auth/views/Login.vue')
+            path: '/admin/login',
+            name: 'admin-login',
+            component: Login
         },
         {
-            path: '/register',
-            // component: Register
-
-            // lazy-loaded
-            component: () => import('./components/auth/views/Register.vue')
-        },
-        {
-            path: '/profile',
-            name: 'profile',
-            // lazy-loaded
+            path: '/admin/profile',
+            name: 'admin-profile',
             component: () => import('./components/auth/views/Profile.vue')
         },
         {
-            path: '/admin',
-            name: 'admin',
-            // lazy-loaded
+            path: '/admin/board-admin',
+            name: 'admin-board-admin',
             component: () => import('./components/auth/views/BoardAdmin.vue')
         },
         {
-            path: '/mod',
-            name: 'moderator',
-            // lazy-loaded
-            component: () => import('./components/auth/views/BoardModerator.vue')
-        },
-        {
-            path: '/user',
-            name: 'user',
-            // lazy-loaded
-            component: () => import('./components/auth/views/BoardUser.vue')
-        },
-        {
-            path: '/user/update',
-            name: 'userUpdate',
-            // lazy-loaded
+            path: '/admin/user/update',
+            name: 'admin-user-update',
             component: () => import('./components/auth/views/userCrud/UserUpdate.vue')
         }
     ]
@@ -87,3 +93,4 @@ export const router = new Router({
 //         next();
 //     }
 // });
+export default router

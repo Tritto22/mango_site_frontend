@@ -1,48 +1,41 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'http://localhost:8080/api/user/';
 
 class UserService {
-    getPublicContent() {
-        return axios.get(API_URL + 'all');
-    }
+    // getPublicContent() {
+    //     return axios.get(API_URL + 'all');
+    // }
 
-    getUserBoard() {
-        return axios.get(API_URL + 'user', { headers: authHeader() });
-    }
+    // getUserBoard() {
+    //     return axios.get(API_URL + 'user', { headers: authHeader() });
+    // }
 
-    getModeratorBoard() {
-        return axios.get(API_URL + 'mod', { headers: authHeader() });
-    }
+    // getModeratorBoard() {
+    //     return axios.get(API_URL + 'mod', { headers: authHeader() });
+    // }
 
-    getAdminBoard() {
-        return axios.get(API_URL + 'admin', { headers: authHeader() });
-    }
+    // getAdminBoard() {
+    //     return axios.get(API_URL + 'admin', { headers: authHeader() });
+    // }
 
     update(user){
-        // return axios.post(API_URL + 'user/update', {
-        //     headers: authHeader(),
-        //     username: user.username,
-        //     email: user.email,
-        //     password: user.password
-        // });
-
         const data = {};
 
-    if (user.username !== null) {
-        data.username = user.username;
-    }
+        if (user.username !== null) {
+            data.username = user.username;
+        }
 
-    if (user.email !== null) {
-        data.email = user.email;
-    }
+        if (user.email !== null) {
+            data.email = user.email;
+        }
 
-    if (user.password !== null) {
-        data.password = user.password;
-    }
+        if (user.password !== null) {
+            data.password = user.password;
+        }
 
-    return axios.put(API_URL + 'user/update',data, { headers: authHeader() });
+        return axios.put(API_URL + 'update',data, { headers: authHeader() });
     }
 }
 

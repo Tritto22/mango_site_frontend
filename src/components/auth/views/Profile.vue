@@ -21,7 +21,7 @@
         <ul>
             <li v-for="(role, index) in currentUser.roles" :key="index">{{ role }}</li>
         </ul>
-        <router-link to="/user/update">
+        <router-link to="/admin/user/update">
             <button type="button" class="btn btn-warning">Modifica</button>
         </router-link>       
     </div>

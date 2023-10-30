@@ -1,6 +1,16 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="public" v-if="isPublicRoute">
+      <Header/>
+      <Main/>
+      <Footer/>
+    </div>
+    <div class="admin" v-else>
+      <AuthHeader/>
+      <AuthMain/>
+      <AuthFooter/>
+    </div>
+    <!-- <nav class="navbar navbar-expand navbar-dark bg-dark">
         <a href class="navbar-brand" @click.prevent>Mango's Site</a>
         <div class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -49,31 +59,49 @@
 
       <div class="container">
         <router-view />
-      </div>
+      </div> -->
   </div>
 </template>
 
 <script>
+import Header from './components/public/macro/Header.vue'
+import Main from './components/public/macro/Main.vue'
+import Footer from './components/public/macro/Footer.vue'
+import AuthHeader from './components/auth/macro/AuthHeader.vue'
+import AuthMain from './components/auth/macro/AuthMain.vue'
+import AuthFooter from './components/auth/macro/AuthFooter.vue'
+
 export default {
   name: 'App',
+  components: {
+    Header,
+    Main,
+    Footer,
+    AuthHeader,
+    AuthMain,
+    AuthFooter
+  },
   computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
+    isPublicRoute() {
+      return !this.$route.path.includes('/admin');
     },
-    showAdminBoard() {
-      if (this.currentUser && this.currentUser.roles) {
-        return this.currentUser.roles.includes('ROLE_ADMIN');
-      }
+    // currentUser() {
+    //   return this.$store.state.auth.user;
+    // },
+    // showAdminBoard() {
+    //   if (this.currentUser && this.currentUser.roles) {
+    //     return this.currentUser.roles.includes('ROLE_ADMIN');
+    //   }
 
-      return false;
-    },
-    showModeratorBoard() {
-      if (this.currentUser && this.currentUser.roles) {
-        return this.currentUser.roles.includes('ROLE_MODERATOR');
-      }
+    //   return false;
+    // },
+    // showModeratorBoard() {
+    //   if (this.currentUser && this.currentUser.roles) {
+    //     return this.currentUser.roles.includes('ROLE_MODERATOR');
+    //   }
 
-      return false;
-    }
+    //   return false;
+    // }
   },
   methods: {
     logOut() {

@@ -1,0 +1,22 @@
+/* LIBRARIES */
+@import '~bootstrap/scss/bootstrap-grid.scss';
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import './variables.scss';
+
+/* TYPO */
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+ul {
+    list-style: none;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'PT Sans', sans-serif;
+}
