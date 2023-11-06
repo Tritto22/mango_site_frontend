@@ -35,7 +35,7 @@ class UserService {
             data.password = user.password;
         }
 
-        return axios.put(API_URL + 'update',data, { headers: authHeader() });
+        return axios.put(API_URL + 'update', data, { headers: authHeader() });
     }
 }
 

@@ -4,7 +4,7 @@
             <a href class="navbar-brand" @click.prevent>Mango's Site</a>
             <div class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <router-link v-if="currentUser" to="/admin/user" class="nav-link">User</router-link>
+                    <router-link v-if="currentUser" to="/admin/dashboard" class="nav-link">Dashboard</router-link>
                 </li>
             </div>
 
@@ -39,7 +39,7 @@ export default {
     methods: {
         logOut() {
             this.$store.dispatch('auth/logout');
-            this.$router.push('/admin/home');
+            this.$router.push('/');
         }
     }
 }

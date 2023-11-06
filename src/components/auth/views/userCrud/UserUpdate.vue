@@ -24,7 +24,12 @@
             </div>
         </form>
 
-        <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'">{{ message }}</div>
+        <div v-if="message" class="alert" :class="successful ? 'alert-success' : 'alert-danger'">
+            {{ message }}
+            <router-link to="/admin">
+                <button type="button" class="btn btn-primary">Home</button>
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -69,8 +74,11 @@ export default {
                 if (isValid) {
                     this.$store.dispatch('auth/update', this.updateUser).then(
                         data => {
-                            this.message = data.message;
-                            this.successful = true;
+                            if(data.payload != null){
+                                this.$store.dispatch('auth/logout');
+                                this.message = "Modifica avvenuta con successo, ora effettua nuovamente il login";
+                                this.successful = true;
+                            }                            
                         },
                         error => {
                             this.message =

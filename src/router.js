@@ -5,7 +5,6 @@ import Galleries from './components/public/pages/Galleries.vue';
 import About from './components/public/pages/About.vue';
 import Blog from './components/public/pages/Blog.vue';
 import Contact from './components/public/pages/Contact.vue';
-import Login from './components/auth/views/Login.vue';
 
 Vue.use(Router);
 
@@ -47,19 +46,19 @@ const router = new Router({
         // ****************************** ADMIN PATH ***********************************
 
         {
-            path: '/admin/',
+            path: '/admin',
             name: 'admin',
             component: () => import('./components/auth/views/Home.vue'),
         },
-        {
-            path: '/admin/home',
-            name: 'admin-home',
-            component: () => import('./components/auth/views/Home.vue')
-        },
+        // {
+        //     path: '/admin/home',
+        //     name: 'admin-home',
+        //     component: () => import('./components/auth/views/Home.vue')
+        // },
         {
             path: '/admin/login',
             name: 'admin-login',
-            component: Login
+            component: () => import('./components/auth/views/Login.vue')
         },
         {
             path: '/admin/profile',
@@ -75,7 +74,15 @@ const router = new Router({
             path: '/admin/user/update',
             name: 'admin-user-update',
             component: () => import('./components/auth/views/userCrud/UserUpdate.vue')
-        }
+        },
+
+                // ****************************** PAINTING PATH ***********************************
+
+        {
+            path: '/admin/dashboard',
+            name: 'admin-painting-dashboard',
+            component: () => import('./components/auth/views/paintingCrud/Dashboard.vue')
+        },
     ]
 });
 
