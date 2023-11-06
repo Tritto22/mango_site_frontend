@@ -8,7 +8,7 @@
     <div class="admin" v-else>
       <AuthHeader/>
       <AuthMain/>
-      <AuthFooter/>
+      <!-- <AuthFooter/> -->
     </div>
     <!-- <nav class="navbar navbar-expand navbar-dark bg-dark">
         <a href class="navbar-brand" @click.prevent>Mango's Site</a>
@@ -69,7 +69,7 @@ import Main from './components/public/macro/Main.vue'
 import Footer from './components/public/macro/Footer.vue'
 import AuthHeader from './components/auth/macro/AuthHeader.vue'
 import AuthMain from './components/auth/macro/AuthMain.vue'
-import AuthFooter from './components/auth/macro/AuthFooter.vue'
+// import AuthFooter from './components/auth/macro/AuthFooter.vue'
 
 export default {
   name: 'App',
@@ -79,7 +79,7 @@ export default {
     Footer,
     AuthHeader,
     AuthMain,
-    AuthFooter
+    // AuthFooter
   },
   computed: {
     isPublicRoute() {

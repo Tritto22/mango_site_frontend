@@ -32,9 +32,7 @@
                     <td>{{ painting.year }}</td>
                     <td>{{ painting.slug }}</td>
                     <td class="d-flex justify-content-end pe-3">
-                        <a href="">
-                            <button type="button" class="btn btn-primary">Visualizza</button>
-                        </a>
+                        <button @click="shareData(painting, 'admin-painting-single')" type="button" class="btn btn-primary">Visualizza</button>
                         <a class="mx-4" href="">
                             <button type="button" class="btn btn-warning">Modifica</button>
                         </a>
@@ -45,8 +43,8 @@
                 </tr>
             </tbody>
         </table>
-        <div class="pages">
-            <a v-for="pageNumber in pages" :key="pageNumber" @click="getPageData(pageNumber, pageSize)">
+        <div class="pages p-4">
+            <a class="mx-2" v-for="pageNumber in pages" :key="pageNumber" @click="getPageData(pageNumber, pageSize)">
                 <button type="button" class="btn btn-primary">{{ pageNumber }}</button>
             </a>
         </div>
@@ -62,7 +60,7 @@ export default {
         return {
             paintings: [],
             pages: 0,
-            pageSize: 10
+            pageSize: 6
         }
     },
     created() {
@@ -74,7 +72,6 @@ export default {
                 response => {
                     this.paintings = response.data.payload;
                     this.pages = this.paintings[0].totPages;
-                    console.log(this.paintings);
                     // if (!this.pages) {
                     //     this.pages = 1;
                     // }
@@ -86,12 +83,29 @@ export default {
         },
         getPageData(pageNumber, pageSize) {
             this.loadData(pageNumber - 1, pageSize); // Carica i dati per la pagina selezionata
-            // console.log(pageNumber - 1);
+        },
+        // passaggio dati tramite props
+        shareData(data, routeName){
+            this.$router.push({
+                name: routeName,
+                params: { 
+                    slug: data.slug,
+                    data: data
+                }
+            })
         }
     }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.container-fluid{
+    height: 90vh;
+}
+.pages{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
 </style>

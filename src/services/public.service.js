@@ -3,9 +3,8 @@ import axios from 'axios';
 
 // const API_URL = 'http://localhost:8080/api/';
 
-class UserService {
+class PaintingService {
     getPublicContent(pageNumber, pageSize) {
-        console.log(pageNumber);
         return axios.get(`http://localhost:8080/api/dashboard?pageNumber=${pageNumber}&pageSize=${pageSize}`);
     }
 
@@ -22,4 +21,4 @@ class UserService {
     // }
 }
 
-export default new UserService();
+export default new PaintingService();
