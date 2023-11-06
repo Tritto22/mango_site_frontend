@@ -45,6 +45,11 @@
                 </tr>
             </tbody>
         </table>
+        <div class="pages">
+            <a v-for="pageNumber in pages" :key="pageNumber" @click="getPageData(pageNumber, pageSize)">
+                <button type="button" class="btn btn-primary">{{ pageNumber }}</button>
+            </a>
+        </div>
     </div>
 </template>
 
@@ -55,23 +60,34 @@ export default {
     name: 'Dashboard',
     data() {
         return {
-            paintings: {
-
-            }
+            paintings: [],
+            pages: 0,
+            pageSize: 10
         }
     },
     created() {
-        PublicService.getPublicContent().then(
-            response => {
-                this.paintings = response.data.payload;
-            },
-            error => {
-                this.content =
-                    (error.response && error.response.data) ||
-                    error.message ||
-                    error.toString();
-            }
-        );
+        this.loadData(0, this.pageSize); // Carica i dati per la pagina 0 all'avvio
+    },
+    methods: {
+        loadData(pageNumber, pageSize) {
+            PublicService.getPublicContent(pageNumber, pageSize).then(
+                response => {
+                    this.paintings = response.data.payload;
+                    this.pages = this.paintings[0].totPages;
+                    console.log(this.paintings);
+                    // if (!this.pages) {
+                    //     this.pages = 1;
+                    // }
+                },
+                error => {
+                    console.log('Errore:', error);
+                }
+            );
+        },
+        getPageData(pageNumber, pageSize) {
+            this.loadData(pageNumber - 1, pageSize); // Carica i dati per la pagina selezionata
+            // console.log(pageNumber - 1);
+        }
     }
 }
 </script>

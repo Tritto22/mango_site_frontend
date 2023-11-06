@@ -4,8 +4,9 @@ import axios from 'axios';
 // const API_URL = 'http://localhost:8080/api/';
 
 class UserService {
-    getPublicContent() {
-        return axios.get('http://localhost:8080/api/dashboard');
+    getPublicContent(pageNumber, pageSize) {
+        console.log(pageNumber);
+        return axios.get(`http://localhost:8080/api/dashboard?pageNumber=${pageNumber}&pageSize=${pageSize}`);
     }
 
     // getUserBoard() {
