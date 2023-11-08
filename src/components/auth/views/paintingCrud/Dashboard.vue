@@ -33,9 +33,9 @@
                     <td>{{ painting.slug }}</td>
                     <td class="d-flex justify-content-end pe-3">
                         <button @click="shareData(painting, 'admin-painting-single')" type="button" class="btn btn-primary">Visualizza</button>
-                        <a class="mx-4" href="">
-                            <button type="button" class="btn btn-warning">Modifica</button>
-                        </a>
+
+                        <button @click="shareData(painting, 'admin-painting-update')" type="button" class="btn btn-warning mx-4">Modifica</button>
+
                         <form method="post">
                             <button type="submit" class="btn btn-danger">Elimina</button>
                         </form>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import PublicService from '../../../../services/public.service';
+import PaintingService from '../../../../services/painting.service';
 
 export default {
     name: 'Dashboard',
@@ -68,7 +68,7 @@ export default {
     },
     methods: {
         loadData(pageNumber, pageSize) {
-            PublicService.getPublicContent(pageNumber, pageSize).then(
+            PaintingService.getDashboard(pageNumber, pageSize).then(
                 response => {
                     this.paintings = response.data.payload;
                     this.pages = this.paintings[0].totPages;
