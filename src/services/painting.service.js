@@ -22,7 +22,7 @@ class PaintingService {
 
     delete(painting){
         if(painting.slug != null){
-            return axios.delete(API_URL + 'delete', painting, { headers: authHeader() });
+            return axios.delete(API_URL + 'delete', { data: painting, headers: authHeader() });
         }
     }
 }

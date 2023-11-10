@@ -45,7 +45,7 @@
             </tbody>
         </table>
         <div class="pages p-4">
-            <a class="mx-2" v-for="pageNumber in pages" :key="pageNumber" @click="getPageData(pageNumber, pageSize)">
+            <a class="mx-2" v-for="pageNumber in pages" :key="pageNumber" @click="handlePageClick(pageNumber, pageSize)">
                 <button type="button" class="btn btn-primary">{{ pageNumber }}</button>
             </a>
         </div>
@@ -62,6 +62,7 @@ export default {
             paintings: [],
             pages: 0,
             pageSize: 6,
+            currentPage: 1,
             delatedPainting: null,
             delatedSucces: false
         }
@@ -77,7 +78,7 @@ export default {
         }
     },
     created() {
-        this.loadData(0, this.pageSize); // Carica i dati per la pagina 0 all'avvio
+        this.loadData(this.currentPage - 1, this.pageSize); // Carica i dati per la pagina 0 all'avvio
     },
     methods: {
         loadData(pageNumber, pageSize) {
@@ -85,17 +86,26 @@ export default {
                 response => {
                     this.paintings = response.data.payload;
                     this.pages = this.paintings[0].totPages;
-                    // if (!this.pages) {
-                    //     this.pages = 1;
-                    // }
+                    if (!this.pages) {
+                        this.pages = 1;
+                    }
                 },
                 error => {
                     console.log('Errore:', error);
                 }
             );
         },
+        handlePageClick(pageNumber, pageSize) {
+            // Chiamare i metodi che desideri al click
+            this.getPageData(pageNumber, pageSize);
+            this.clearDeleteInfo();
+        },
         getPageData(pageNumber, pageSize) {
+            this.currentPage = pageNumber;
             this.loadData(pageNumber - 1, pageSize); // Carica i dati per la pagina selezionata
+        },
+        clearDeleteInfo(){
+            this.delatedSucces = false
         },
         // passaggio dati tramite vuex e params
         shareData(data, routeName) {
@@ -114,6 +124,7 @@ export default {
                 response => {
                     this.delatedPainting = response.data.payload;
                     this.delatedSucces = true;
+                    this.getPageData(this.currentPage, this.pageSize);
                 },
                 error => {
                     console.log('Errore:', error);
