@@ -51,7 +51,15 @@ export default {
         };
     },
     computed: {
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
         ...mapState('auth', ['user'])
+    },
+    mounted() {
+        if (!this.currentUser) {
+            this.$router.push('/admin/login');
+        }
     },
     watch: {
         user: {

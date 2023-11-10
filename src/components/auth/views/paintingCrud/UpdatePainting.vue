@@ -70,7 +70,9 @@
 </template>
 
 <script>
-import PaintingService from '../../../../services/painting.service'
+import PaintingService from '../../../../services/painting.service';
+// import { mapState } from 'vuex';
+
 export default {
     name: 'UpdatePainting',
     data() {
@@ -81,17 +83,35 @@ export default {
             message: '',
             errorProp: false,
             isTitleValid: true,
-            isYearValid: true
+            isYearValid: true,
+        }
+    },
+    computed: {
+        currentUser() {
+            return this.$store.state.auth.user;
+        },
+        currentPainting() {
+            return this.$store.state.painting.selectedPainting;
         }
     },
     created() {
-        if(this.$route.params.data != null){
+        // prendo dati da params o Vuex
+        // Se non c'è alcun painting selezionato nel Vuex, cerca nel localStorage
+        
+        if (this.currentPainting != null) {
+            this.painting = this.currentPainting;
+        } else if(this.$route.params.data != null) {
+
             this.painting = this.$route.params.data;
-        }else{
+        } else {
             this.errorProp = true;
         }
-        
-    },
+    },   
+    mounted() {
+        if (!this.currentUser) {
+            this.$router.push('/admin/login');
+        } 
+    },   
     methods: {
         editPainting() {
             this.submitted = true;

@@ -4,6 +4,9 @@
             <div class="col">
                 <h3>Questa è la tua dashboard</h3>
             </div>
+            <div v-if="delatedSucces && delatedPainting != null" class="col">
+                <h5>Il quadro {{ delatedPainting.title }} è stato eliminato con successo!</h5>
+            </div>
             <div class="col d-flex justify-content-end">
                 <a href="" class="me-4">
                     <button type="button" class="btn btn-success">Aggiungi quadro</button>
@@ -36,9 +39,7 @@
 
                         <button @click="shareData(painting, 'admin-painting-update')" type="button" class="btn btn-warning mx-4">Modifica</button>
 
-                        <form method="post">
-                            <button type="submit" class="btn btn-danger">Elimina</button>
-                        </form>
+                        <button @click="deleteSelectedPainting(painting)" type="button" class="btn btn-danger">Elimina</button>
                     </td>
                 </tr>
             </tbody>
@@ -60,7 +61,19 @@ export default {
         return {
             paintings: [],
             pages: 0,
-            pageSize: 6
+            pageSize: 6,
+            delatedPainting: null,
+            delatedSucces: false
+        }
+    },
+    computed: {
+        currentUser() {
+            return this.$store.state.auth.user;
+        }
+    },
+    mounted() {
+        if (!this.currentUser) {
+            this.$router.push('/admin/login');
         }
     },
     created() {
@@ -84,15 +97,28 @@ export default {
         getPageData(pageNumber, pageSize) {
             this.loadData(pageNumber - 1, pageSize); // Carica i dati per la pagina selezionata
         },
-        // passaggio dati tramite props
-        shareData(data, routeName){
+        // passaggio dati tramite vuex e params
+        shareData(data, routeName) {
+            this.$store.commit('painting/setSelectedPainting', data);
+            localStorage.setItem('selectedPainting', JSON.stringify(data));
             this.$router.push({
                 name: routeName,
                 params: { 
-                    slug: data.slug,
-                    data: data
+                    slug: data.slug
                 }
-            })
+            });
+        },
+
+        deleteSelectedPainting(painting){
+            PaintingService.delete(painting).then(
+                response => {
+                    this.delatedPainting = response.data.payload;
+                    this.delatedSucces = true;
+                },
+                error => {
+                    console.log('Errore:', error);
+                }
+            )
         }
     }
 }

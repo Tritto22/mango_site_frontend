@@ -8,17 +8,7 @@ class PaintingService {
         return axios.get(`${API_URL}dashboard?pageNumber=${pageNumber}&pageSize=${pageSize}`, { headers: authHeader() });
     }
 
-    update(painting){
-        // console.log("Chiamata a update in corso...");
-        // const data = {};
-        // console.log(painting);
-        // if (painting.title !== null && painting.year >= 1993 && painting.year <= 2199) {
-        //     this.data = painting;
-        // }
-
-        // return axios.put(API_URL + 'update', data, { headers: authHeader() });
-
-    
+    update(painting){    
         if (
             painting.title !== '' && // Aggiunto controllo sull'input non vuoto
             painting.year >= 1993 &&
@@ -27,6 +17,12 @@ class PaintingService {
             return axios.put(API_URL + 'update', painting, { headers: authHeader() });
         } else {
             return Promise.reject("I dati del quadro non sono validi.");
+        }
+    }
+
+    delete(painting){
+        if(painting.slug != null){
+            return axios.delete(API_URL + 'delete', painting, { headers: authHeader() });
         }
     }
 }
