@@ -4,15 +4,12 @@
             <div class="col">
                 <h3>Questa è la tua dashboard</h3>
             </div>
-            <div v-if="delatedSucces && delatedPainting != null" class="col">
+            <div v-if="delatedSucces && delatedPainting != null" class="col alert-success text-center">
                 <h5>Il quadro {{ delatedPainting.title }} è stato eliminato con successo!</h5>
             </div>
             <div class="col d-flex justify-content-end">
                 <a href="" class="me-4">
                     <button type="button" class="btn btn-success">Aggiungi quadro</button>
-                </a>
-                <a href="" class="me-4">
-                    <button type="button" class="btn btn-secondary">Pagina Iniziale</button>
                 </a>
             </div>
         </div>

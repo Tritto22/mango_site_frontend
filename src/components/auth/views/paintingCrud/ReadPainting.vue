@@ -1,14 +1,12 @@
 <template>
     <section>
-        <div v-if="!errorProp" class="container-fluid">
+        <div v-if="!errorProp && !delatedSucces" class="container-fluid">
             <div class="row  pt-4">
                 <div class="col">
                     <nav class="d-flex justify-content-end">
                         <button @click="shareData(painting, 'admin-painting-update')" type="button" class="btn btn-warning mx-4">Modifica</button>
 
-                        <form method="post">
-                            <button type="submit" class="btn btn-danger">Elimina</button>
-                        </form>
+                        <button @click="deleteSelectedPainting(painting)" type="button" class="btn btn-danger">Elimina</button>
                     </nav>
                 </div>
             </div>
@@ -51,16 +49,22 @@
         <div v-if="errorProp" class="alert-danger text-center">
             <h3>Impossibile visualizzare il quadro selezionato, tornare alla Dashboard e riprovare.</h3>
         </div>
+        <div v-if="delatedSucces" class="alert-success text-center">
+            <h3>Eliminazione avvenuta con successo</h3>
+        </div>
     </section>
 </template>
 
 <script>
+import PaintingService from '../../../../services/painting.service';
+
 export default {
     name: 'ReadPainting',
     data(){
         return{
             painting:{},
-            errorProp: false
+            errorProp: false,
+            delatedSucces: false
         }
     },
     computed: {
@@ -94,6 +98,18 @@ export default {
                     slug: data.slug
                 }
             });
+        },
+        deleteSelectedPainting(painting) {
+            PaintingService.delete(painting).then(
+                response => {
+                    this.delatedPainting = response.data.payload;
+                    this.delatedSucces = true;
+
+                },
+                error => {
+                    console.log('Errore:', error);
+                }
+            )
         }
     }
 }

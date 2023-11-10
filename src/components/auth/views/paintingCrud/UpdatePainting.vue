@@ -1,12 +1,10 @@
 <template>
     <section>
-            <div v-if="!errorProp && !submitted" class="container-fluid">
+        <div v-if="!errorProp && !submitted && !delatedSucces" class="container-fluid">
             <div class="row  p-4">
                 <div class="col">
                     <nav class="d-flex justify-content-end">
-                        <form method="post">
-                            <button type="submit" class="btn btn-danger">Elimina</button>
-                        </form>
+                        <button @click="deleteSelectedPainting(painting)" type="button" class="btn btn-danger">Elimina</button>
                     </nav>
                 </div>
             </div>
@@ -60,18 +58,20 @@
             </div>
         </div>
 
-        <div v-if="!errorProp && submitted" :class="successful ? 'alert-success text-center' : 'alert-danger text-center'">
+        <div v-if="!errorProp && submitted && !delatedSucces" :class="successful ? 'alert-success text-center' : 'alert-danger text-center'">
             <h3>{{ message }}</h3> 
         </div>
-        <div v-if="errorProp && !submitted" class="alert-danger text-center">
+        <div v-if="errorProp && !submitted && !delatedSucces" class="alert-danger text-center">
             <h3>Modifica impossibile, tornare alla Dashboard</h3>
+        </div>
+        <div v-if="delatedSucces" class="alert-success text-center">
+            <h3>Eliminazione avvenuta con successo</h3>
         </div>
     </section>
 </template>
 
 <script>
 import PaintingService from '../../../../services/painting.service';
-// import { mapState } from 'vuex';
 
 export default {
     name: 'UpdatePainting',
@@ -84,6 +84,7 @@ export default {
             errorProp: false,
             isTitleValid: true,
             isYearValid: true,
+            delatedSucces: false
         }
     },
     computed: {
@@ -145,6 +146,18 @@ export default {
                 this.isYearValid = false
             }
             
+        },
+        deleteSelectedPainting(painting) {
+            PaintingService.delete(painting).then(
+                response => {
+                    this.delatedPainting = response.data.payload;
+                    this.delatedSucces = true;
+
+                },
+                error => {
+                    console.log('Errore:', error);
+                }
+            )
         }
     }
 }
