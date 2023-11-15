@@ -4,7 +4,11 @@ export const painting = {
         selectedPainting: JSON.parse(localStorage.getItem('selectedPainting')) || null
     },
     actions: {
-        // Azioni per le pitture
+        clearSelectedPainting({ commit }) {
+            // Rimuovere l'elemento dal localStorage
+            localStorage.removeItem('selectedPainting');
+            commit('clearSelectedPainting');
+        }
     },
     mutations: {
         setSelectedPainting(state, painting) {

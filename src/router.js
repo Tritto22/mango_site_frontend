@@ -95,6 +95,11 @@ const router = new Router({
             name: 'admin-painting-update',
             component: () => import('./components/auth/views/paintingCrud/UpdatePainting.vue'),
             props: true
+        },
+        {
+            path: '/admin/new-painting/create',
+            name: 'admin-painting-create',
+            component: () => import('./components/auth/views/paintingCrud/NewPainting.vue'),
         }
     ]
 });

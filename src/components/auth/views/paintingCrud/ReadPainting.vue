@@ -10,6 +10,11 @@
                     </nav>
                 </div>
             </div>
+            <div class="row  p-4" v-if="painting.favorite">
+                <div class="col">
+                    <font-awesome-icon :icon="['fas', 'star']" class="favorite"/>
+                </div>
+            </div>
             <div class="row  p-4">
                 <div class="col">
                     <h2 >Titolo => <span>{{ painting.title.toUpperCase() }}</span ></h2>
@@ -19,10 +24,17 @@
                 <div class="col">
                     <h2 >Immagine => </h2>
                     <div class="d-flex justify-content-center">
-                        <img v-if="painting.img != null" :alt="painting.title" :src="painting.img">
+                        <img v-if="painting.img != null" :alt="painting.title" :src="painting.img" @error="handleImageError(painting)" >
                         <img v-else src="http://drive.google.com/uc?export=view&id=1ZpJCY7ijNY1oO1mvGMl2gnOcaIXyGM3n">
-                    </div>
-            
+                    </div>            
+                </div>
+            </div>
+            <div class="row  p-4" v-if="painting.details != null">
+                <div class="col" v-for="detail,i in painting.details" :key="i">
+                    <h2 >Dettaglio {{ i + 1}} => </h2>
+                    <div class="d-flex justify-content-center">
+                        <img :alt="detail.name" :src="detail.linkImg">
+                    </div>            
                 </div>
             </div>
             <div class="row  p-4">
@@ -110,11 +122,18 @@ export default {
                     console.log('Errore:', error);
                 }
             )
+        },
+        handleImageError(painting) {
+            // Questo metodo viene chiamato quando l'immagine non può essere caricata correttamente
+            painting.img = 'http://drive.google.com/uc?export=view&id=1ZpJCY7ijNY1oO1mvGMl2gnOcaIXyGM3n';
         }
     }
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.favorite{
+    color: rgb(232, 232, 60);
+    font-size: 30px;
+}
 </style>

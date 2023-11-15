@@ -8,9 +8,9 @@
                 <h5>Il quadro {{ delatedPainting.title }} è stato eliminato con successo!</h5>
             </div>
             <div class="col d-flex justify-content-end">
-                <a href="" class="me-4">
+                <router-link to="/admin/new-painting/create" class="me-4">
                     <button type="button" class="btn btn-success">Aggiungi quadro</button>
-                </a>
+                </router-link>
             </div>
         </div>
         <table class="table">

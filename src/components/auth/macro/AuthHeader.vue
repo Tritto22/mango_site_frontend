@@ -4,7 +4,7 @@
             <a href class="navbar-brand" @click.prevent>Mango's Site</a>
             <div class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <router-link v-if="currentUser" to="/admin/dashboard" class="nav-link">Dashboard</router-link>
+                    <router-link v-if="currentUser" to="/admin/dashboard" class="nav-link" @click="clearSelectedPainting">Dashboard</router-link>
                 </li>
             </div>
 
@@ -40,6 +40,12 @@ export default {
         logOut() {
             this.$store.dispatch('auth/logout');
             this.$router.push('/');
+        },
+        clearSelectedPainting() {
+            // Chiamare la mutazione per pulire lo stato
+            this.$store.dispatch('painting/clearSelectedPainting');
+
+            
         }
     }
 }

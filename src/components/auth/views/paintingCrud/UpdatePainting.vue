@@ -31,6 +31,15 @@
                                 <p class="text-danger" v-if="errors.img">{{ errors.img }}</p>
                             </div>
 
+                            <div v-if="painting.details != null" class="mb-3">
+                                <div class="detail" v-for="detail, i in painting.details" :key="i">
+                                    <label for="img" class="form-label">Link dettaglio quadro</label>
+                                    <input class="form-control" v-model="painting.details[i].name" type="text" :id="i + detail.name" placeholder="Inserisci il nome del dettaglio">
+                                    <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + detail.linkImg" placeholder="Inserisci il link del dettaglio">
+                                    <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
+                                </div>
+                            </div>
+
                             <div class="form-group mb-3">
                                 <label for="size" class="form-label">Misure</label>
                                 <input class="form-control" v-model="painting.size" id="size" placeholder="Inserisci le misure" type="text" />
@@ -47,6 +56,11 @@
                                 <label for="description" class="form-label">Descrizione</label>
                                 <textarea class="form-control" v-model="painting.description" id="description" placeholder="Inserisci la nuova descrizione" rows="5"></textarea>
                                 <p class="text-danger" v-if="errors.description">{{ errors.description }}</p>
+                            </div>
+
+                            <div class="form-group form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="favorite" v-model="painting.favorite" role="button">
+                                <label class="form-check-label" for="favorite">Aggiungi ai preferiti</label>
                             </div>
 
                             <div class="form-group">
