@@ -20,6 +20,26 @@
                                 <p class="text-danger" v-if="errors.img">{{ errors.img }}</p>
                             </div>
 
+                            <div class="mb-3">
+                                <div class="first-detail mb-2">
+                                    <label for="img" class="form-label">Link dettaglio quadro</label>
+                                    <input class="form-control mb-1" v-model="painting.details[0].name" type="text" :id="0 + 'name'" placeholder="Inserisci il nome del dettaglio">
+                                    <input class="form-control" v-model="painting.details[0].linkImg" type="text" :id="0 + 'linkImg'" placeholder="Inserisci il link del dettaglio">
+                                    <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
+                                </div>
+
+                                <div v-if="countDetails >= 1" class="mb-3">
+                                    <div class="detail mb-2" v-for="i in countDetails" :key="i">
+                                        <label for="img" class="form-label">Link dettaglio quadro</label>
+                                        <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + 'name'" placeholder="Inserisci il nome del dettaglio">
+                                        <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + 'linkImg'" placeholder="Inserisci il link del dettaglio">
+                                        <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-info" @click="addDetail">Aggiungi dettaglio</button>
+                            </div>
+
                             <div class="form-group mb-3">
                                 <label for="size" class="form-label">Misure</label>
                                 <input class="form-control" v-model="painting.size" id="size"
@@ -40,6 +60,11 @@
                                 <textarea class="form-control" v-model="painting.description" id="description"
                                     placeholder="Inserisci la nuova descrizione" rows="5"></textarea>
                                 <p class="text-danger" v-if="errors.description">{{ errors.description }}</p>
+                            </div>
+
+                            <div class="form-group form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="favorite" v-model="painting.favorite" role="button">
+                                <label class="form-check-label" for="favorite">Aggiungi ai preferiti</label>
                             </div>
 
                             <div class="form-group">
@@ -65,12 +90,16 @@ export default {
     name: 'NewPainting',
     data() {
         return {
-            painting: {},
+            painting: {
+                favorite: false,
+                details: [{}]
+            },
             successful: false,
             submitted: false,
             message: '',
             isTitleValid: true,
-            isYearValid: true
+            isYearValid: true,
+            countDetails: 0
         }
     },
     computed: {
@@ -115,6 +144,10 @@ export default {
                 this.isYearValid = false
             }
 
+        },
+        addDetail(){
+            this.countDetails ++;
+            this.painting.details.push({});
         }
     }
 }

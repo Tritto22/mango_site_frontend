@@ -32,12 +32,23 @@
                             </div>
 
                             <div v-if="painting.details != null" class="mb-3">
-                                <div class="detail" v-for="detail, i in painting.details" :key="i">
+                                <div class="detail mb-2" v-for="detail, i in painting.details" :key="i">
                                     <label for="img" class="form-label">Link dettaglio quadro</label>
-                                    <input class="form-control" v-model="painting.details[i].name" type="text" :id="i + detail.name" placeholder="Inserisci il nome del dettaglio">
+                                    <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + detail.name" placeholder="Inserisci il nome del dettaglio">
                                     <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + detail.linkImg" placeholder="Inserisci il link del dettaglio">
                                     <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
                                 </div>
+
+                                <div v-if="countDetails > this.painting.details.length" class="mb-3">
+                                    <div class="detail mb-2" v-for="i in countDetails" :key="i">
+                                        <label for="img" class="form-label">Link dettaglio quadro</label>
+                                        <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + 'name'" placeholder="Inserisci il nome del dettaglio">
+                                        <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + 'linkImg'" placeholder="Inserisci il link del dettaglio">
+                                        <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-info" @click="addDetail">Aggiungi dettaglio</button>
                             </div>
 
                             <div class="form-group mb-3">
@@ -91,14 +102,17 @@ export default {
     name: 'UpdatePainting',
     data() {
         return {
-            painting: {},
+            painting: { 
+                details: [{}] 
+            },
             successful: false,
             submitted: false,
             message: '',
             errorProp: false,
             isTitleValid: true,
             isYearValid: true,
-            delatedSucces: false
+            delatedSucces: false,
+            countDetails: 0
         }
     },
     computed: {
@@ -115,9 +129,10 @@ export default {
         
         if (this.currentPainting != null) {
             this.painting = this.currentPainting;
+            this.countDetails = this.painting.details.length;
         } else if(this.$route.params.data != null) {
-
             this.painting = this.$route.params.data;
+            this.countDetails = this.painting.details.length;
         } else {
             this.errorProp = true;
         }
@@ -172,6 +187,10 @@ export default {
                     console.log('Errore:', error);
                 }
             )
+        },
+        addDetail() {
+            this.countDetails++;
+            this.painting.details.push({});
         }
     }
 }
