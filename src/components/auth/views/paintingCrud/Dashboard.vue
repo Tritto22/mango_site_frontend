@@ -82,10 +82,12 @@ export default {
             PaintingService.getDashboard(pageNumber, pageSize).then(
                 response => {
                     this.paintings = response.data.payload;
-                    this.pages = this.paintings[0].totPages;
-                    if (!this.pages) {
-                        this.pages = 1;
+                    if (this.paintings && this.paintings.length > 0) {
+                        this.pages = this.paintings[0].totPages;
+                    }else if (this.currentPage !== 1 && this.currentPage >= this.pages) {
+                        this.getPageData(this.currentPage - 1, this.pageSize);
                     }
+                    
                 },
                 error => {
                     console.log('Errore:', error);
