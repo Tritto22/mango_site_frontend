@@ -36,6 +36,7 @@ class PaintingService {
             return axios.delete(API_URL + 'delete', { data: painting, headers: authHeader() });
         }
     }
+
 }
 
 export default new PaintingService();

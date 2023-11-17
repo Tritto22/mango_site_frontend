@@ -56,6 +56,13 @@
                             </div>
 
                             <div class="form-group mb-3">
+                                    <label for="tecnique" class="form-label">Tecnica utilizzata</label>
+                                    <input class="form-control" v-model="painting.tecnique" id="tecnique"
+                                        placeholder="Inserisci le misure" type="text" />
+                                    <p class="text-danger" v-if="errors.tecnique">{{ errors.tecnique }}</p>
+                                </div>
+
+                            <div class="form-group mb-3">
                                 <label for="description" class="form-label">Descrizione</label>
                                 <textarea class="form-control" v-model="painting.description" id="description"
                                     placeholder="Inserisci la nuova descrizione" rows="5"></textarea>
@@ -92,6 +99,7 @@ export default {
         return {
             painting: {
                 favorite: false,
+                img: 'http://drive.google.com/uc?export=view&id=',
                 details: [{}]
             },
             successful: false,

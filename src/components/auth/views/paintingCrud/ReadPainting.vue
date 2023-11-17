@@ -136,4 +136,8 @@ export default {
     color: rgb(232, 232, 60);
     font-size: 30px;
 }
+img{
+    object-fit: contain;
+    width: 30%;
+}
 </style>
