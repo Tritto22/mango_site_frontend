@@ -7,9 +7,9 @@
                 class="hero" :class="[((i == position) ? 'active' : 'disable'), (hero.name)]" 
                 @mouseover="stopAutoplay()" @mouseleave="autoplay()"
                 >
-                    <img src="" alt="">
+                    <img :src="slider[i].path" :key="i" alt="hero.name">
                 </div>
-                <!-- <div class="hero">
+                <!-- <div class="hero h-100 w-100 d-flex justify-content-center align-items-center">
                     <img :src="slider[0].path" :key="0" alt="">
                 </div> -->
         </div>
@@ -30,19 +30,19 @@ export default {
                 },
                 {
                     name: 'quadro2',
-                    path: require('../../../assets/img/slider/quadro1.jpg')
+                    path: require('../../../assets/img/slider/quadro2.jpg')
                 },
                 {
                     name: 'quadro3',
-                    path: require('../../../assets/img/slider/quadro1.jpg')
+                    path: require('../../../assets/img/slider/quadro3.jpg')
                 },
                 {
                     name: 'quadro4',
-                    path: require('../../../assets/img/slider/quadro1.jpg')
+                    path: require('../../../assets/img/slider/quadro4.jpg')
                 },
                 {
                     name: 'quadro5',
-                    path: require('../../../assets/img/slider/quadro1.jpg')
+                    path: require('../../../assets/img/slider/quadro5.jpg')
                 }
             ],
             position: 0,
@@ -81,32 +81,23 @@ export default {
 @import '../../../assets/style/global.scss';
 
     .active{
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
     }
     .disable{
         display: none;
     }
-    .quadro1{
-        background-image: url('../../../assets/img/slider/quadro1.jpg');
-    }
-    .quadro2{
-        background-image: url('../../../assets/img/slider/quadro2.jpg');
-    }
-    .quadro3{
-        background-image: url('../../../assets/img/slider/quadro3.jpg');
-    }
-    .quadro4{
-        background-image: url('../../../assets/img/slider/quadro4.jpg');
-    }
-    .quadro5{
-        background-image: url('../../../assets/img/slider/quadro5.jpg');
-    }
     .slider{
-        height: 450px;
+        height: 85vh;
+        background-color: #0000000f;
+        border-radius: 5px;
         .hero{
             img{
                 width: 100%;
-                height: 390px;
+                height: 90%;
                 object-fit: contain;
             }
         }

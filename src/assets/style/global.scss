@@ -7,6 +7,11 @@
 a {
     text-decoration: none;
     color: currentColor;
+    &:hover {
+        text-decoration: none;
+        color: currentColor;
+        font-weight: bolder;
+    }
 }
 
 ul {

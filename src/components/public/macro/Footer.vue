@@ -1,16 +1,23 @@
 <template>
-    <footer>
-        <h1>Sono l'footer</h1>
+    <footer class="d-flex align-items-center justify-content-center">
+        <p class="copyRight">All images © AntonioMango</p>
     </footer>
 </template>
 
 <script>
 export default {
-    // eslint-disable-next-line
     name: 'Footer'
 }
 </script>
 
 <style lang="scss">
+@import '../../../assets/style/global.scss';
 
+footer{
+    height: 6vh;
+    .copyRight{
+    font-size: 10px;
+    text-align: center;
+}
+}
 </style>
