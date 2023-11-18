@@ -1,18 +1,23 @@
 <template>
     <div class="container-fluid d-flex flex-column justify-content-between">
         <div class="row">
-            <div class="col-1 button left"></div>
+            <div class="col-1 button left">
+
+            </div>
+
             <div class="col-10 gallery">
                 <div class="row row-cols-3">
-                <!-- <div class="col painting-card d-flex justify-content-center align-items-center" v-for="painting, i in paintings" :key="i">
-                <img :src="painting.img" :alt="painting.title">
-            </div> -->
-                <div class="col painting-card d-flex justify-content-center align-items-center" v-for="i in pageSize" :key="i">
-                    <img >
+                    <div class="col p-3" v-for="painting, i in paintings" :key="i">
+                        <div class="painting-card d-flex justify-content-center align-items-center">
+                            <img :src="painting.img" :alt="painting.title">
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-1 button right">
+
             </div>
-            <div class="col-1 button right"></div>
         </div>
         <!-- <div class="row row-cols-3">
             <div class="col painting-card d-flex justify-content-center align-items-center" v-for="painting, i in paintings" :key="i">
@@ -84,17 +89,25 @@ export default {
 //     }
 // }
 .button{
-    background-color: violet;
+    background-color: rgb(228, 225, 225);
+    cursor: pointer;
+    &.right{
+        clip-path: polygon(20% 10%, 50% 50%, 20% 90%, 20% 90%, 34% 50%, 20% 10%);
+    }
 }
 .gallery{
     padding: 30px 50px 0 50px;
+
 }
 .painting-card{
-    padding: 20px 20px 10px 20px;
+    width: 100%;
+    height: 250px;
+    background-color: rgb(240, 237, 237);
+    border-radius: 10px;
     img{
-        background-color: red;
-        width: 100%;
-        height: 250px;
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
     }
 }
 
