@@ -112,9 +112,8 @@ export default {
 }
 .slider{
     height: 85vh;
-    width: 99vw;
     background-color: #0000000f;
-    border-radius: 5px;
+    border-radius: 10px;
     
     overflow: hidden;
     .hero{
