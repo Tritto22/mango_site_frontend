@@ -16,8 +16,8 @@ export default {
 footer{
     height: 6vh;
     .copyRight{
-    font-size: 10px;
-    text-align: center;
-}
+        font-size: 10px;
+        text-align: center;
+    }
 }
 </style>

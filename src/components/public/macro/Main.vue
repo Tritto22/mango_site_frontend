@@ -6,14 +6,10 @@
 
 <script>
 export default {
-    // eslint-disable-next-line
     name: 'Main'
 }
 </script>
 
 <style lang="scss">
-@import '../../../assets/style/global.scss';
-main{
-    height: 85vh
-}
+// @import '../../../assets/style/global.scss';
 </style>

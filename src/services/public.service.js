@@ -6,6 +6,10 @@ class PublicService {
     getSliderPaintings(){
         return axios.get(API_URL + 'home');
     }
+    
+    getGalleriesPaintings(pageNumber, pageSize) {
+        return axios.get(`${API_URL}gallery?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+    }
 }
 
 export default new PublicService();

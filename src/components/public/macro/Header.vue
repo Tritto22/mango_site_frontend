@@ -5,7 +5,7 @@
                 <div class="col d-flex align-items-center pl-5">
                     <h4><router-link to="/">Antonio Mango</router-link></h4>
                 </div>
-                <div class="col d-flex align-items-center justify-content-end">
+                <div class="col d-flex align-items-center justify-content-end pr-5">
                     <nav>
                         <ul class="d-flex justify-content-around">
                             <li>
@@ -34,7 +34,6 @@
 
 <script>
 export default {
-    // eslint-disable-next-line
     name: 'Header'
 }
 </script>

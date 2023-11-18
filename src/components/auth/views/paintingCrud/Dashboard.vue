@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="painting in paintings" :key="painting.id">
+                <tr v-for="painting, i in paintings" :key="i">
                     <th scope="row">{{ painting.id }}</th>
                     <td>{{ painting.title }}</td>
                     <td>{{ painting.size }}</td>
