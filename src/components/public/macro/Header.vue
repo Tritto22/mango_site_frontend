@@ -78,33 +78,27 @@ export default {
 @import '../../../assets/style/global.scss';
 @import url('https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-.row{
-    padding: 0 0 10px 0;
-    .col{
-        padding-top: 10px;
-        a{
-            text-transform: uppercase;
-            font-family: 'Philosopher'; 
-            color: #868686;
-        }
-        .logo{
-            font-size: 32px;
-        }
-        h4{
-            font-size: 16px;
-        }
-        li{
-            margin-left: 20px;
-            margin-right: 20px;
-        }
-        nav{
-            // background-color: rgba(240, 240, 240, 0.9);
-            // background-color: rgba(247, 247, 247, 0.9);
-            z-index: 1;
-            border-radius: 10px;
-            width: 95%;
-        }
-    }
+a{
+    text-transform: uppercase;
+    font-family: 'Philosopher'; 
+    color: #868686 !important;
+}
+.logo{
+    font-size: 32px;
+}
+h4{
+    font-size: 16px;
+}
+li{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+nav{
+    // background-color: rgba(240, 240, 240, 0.9);
+    // background-color: rgba(247, 247, 247, 0.9);
+    z-index: 1;
+    border-radius: 10px;
+    width: 95%;
 }
 hr{
     width: 90%;

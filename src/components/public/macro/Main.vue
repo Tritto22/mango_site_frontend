@@ -12,10 +12,11 @@ export default {
 
 <style lang="scss">
 // @import '../../../assets/style/global.scss';
+@import '../../../assets/style/variables.scss';
 main{
     padding-top: 10px;
     padding-bottom: 10px;
-    height: 84vh;
+    height: $mainHeight;
     overflow: scroll;
 }
 </style>

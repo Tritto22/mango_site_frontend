@@ -7,15 +7,6 @@
             class="hero" :class="[((i == position) ? 'active' : 'disable'), (!mouseHover ? 'effect' : '')]"
             >
                 <img class="myImg" v-if="hero.img != null" :src="hero.img" :key="i" :alt="hero.title" @mousedown="stopAutoplay()" @mouseup="autoplay()">
-                <!-- <img class="myImg" v-if="hero.img != null" :src="slider[0].img" :alt="slider[0]"> -->
-                <!-- <div v-if="hero.details != null">
-                    <div 
-                        v-for="(detail, i) in hero.details" :key="i"
-                        class="hero" :class="[((i == position) ? 'active' : 'disable'), (!mouseHover ? 'effect' : '')]"
-                    >
-                        <img class="myImg" :src="detail.linkImg" :alt="hero.title" >
-                    </div>
-                </div> -->
             </div>
         </div>
 
@@ -76,7 +67,7 @@ export default {
             }
         },
         autoplay: function () {
-            this.autoplayID = setInterval(this.right, 4860);
+            this.autoplayID = setInterval(this.right, 5000);
             this.mouseHover = false;
         },
         stopAutoplay: function () {
@@ -112,23 +103,29 @@ export default {
 }
 .effect{
     position: absolute;
-    animation: sliderInOut 5s ease-in-out;
+    // animation: sliderInOut 5s ease-in-out;
+    animation: fadeIn 1s, fadeOut 1s 4.7s;
 }
-@keyframes sliderInOut{
-    0% {left: 100%; top: 50%; transform: translate(100%, -50%);}
-    40% {left: 50%; top: 50%; transform: translate(-50%, -50%);}
-    50% {left: 50%; top: 50%; transform: translate(-50%, -50%);}
-    80% {left: 50%; top: 50%; transform: translate(-50%, -50%);}
-    100% {left: 0%; top: 50%; transform: translate(-100%, -50%);}
+// @keyframes sliderInOut{
+//     0% {left: 100%; top: 50%; transform: translate(100%, -50%);}
+//     40% {left: 50%; top: 50%; transform: translate(-50%, -50%);}
+//     50% {left: 50%; top: 50%; transform: translate(-50%, -50%);}
+//     80% {left: 50%; top: 50%; transform: translate(-50%, -50%);}
+//     100% {left: 0%; top: 50%; transform: translate(-100%, -50%);}
+// }
+@keyframes fadeIn {
+    from {opacity: 0.4}
+    to {opacity: 1}
+}
+@keyframes fadeOut {
+    from {opacity: 1}
+    to {opacity: 0.4}
 }
 .disable{
     display: none;
 }
 .slider{
-    // height: 82vh;
     height: 80vh;
-    // background-color: #0000000f;
-    // border-radius: 10px;
     overflow: hidden;
     .hero{
         position: relative;
@@ -137,10 +134,6 @@ export default {
         .myImg{
             width: 95%;
             height: auto;
-            // height: 1023px;
-            // position: relative;
-            // top: 15%;
-            // object-fit: contain;
         }
     }
 }

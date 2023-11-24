@@ -1,41 +1,40 @@
 <template>
-    <div class="container-fluid d-flex flex-column justify-content-between">
-        <div class="row" v-if="paintings.length > 0">
-            <div class="col-1 button left">
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="row justify-content-center align-items-center flex-column gallery" v-if="paintings.length > 0">
+            <!-- <div class="col-1 button left">
 
-            </div>
+            </div> -->
 
-            <div class="col-10 gallery">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 align-items-center">
-                    <div class="col p-3" v-for="painting, i in paintings" :key="i">
+            <!-- <div class="col-10 gallery"> -->
+                <!-- <div class="row align-items-center"> -->
+                    <!-- row-cols-1 row-cols-md-2 row-cols-lg-4 
+                        <div class="col" v-for="painting, i in paintings" :key="i">
                         <div class="painting-card d-flex justify-content-center align-items-center">
                             <img :src="painting.img" :alt="painting.title">
                         </div>
+                    </div> -->
+                    <div class="col d-flex flex-wrap justify-content-center">
+                        <div class="painting-card d-flex justify-content-center align-items-center" v-for="painting, i in paintings" :key="i">
+                            <img :src="painting.img" :alt="painting.title">
+                        </div>
                     </div>
-                </div>
-            </div>
+                <!-- </div> -->
+                
+            <!-- </div> -->
 
-            <div class="col-1 button right">
+            <!-- <div class="col-1 button right">
 
-            </div>
+            </div> -->
         </div>
 
         <div v-else>
             <Loader/>
         </div>
-        <!-- <div class="row row-cols-3">
-            <div class="col painting-card d-flex justify-content-center align-items-center" v-for="painting, i in paintings" :key="i">
-                <img :src="painting.img" :alt="painting.title">
-            </div>
-            <div class="col painting-card d-flex justify-content-center align-items-center" v-for="i in pageSize" :key="i">
-                <img >
-            </div>
-        </div> -->
-        <!-- <div class="pages d-flex justify-content-center p-4">
-            <a class="mx-2" v-for="pageNumber in pages" :key="pageNumber" @click="handlePageClick(pageNumber, pageSize)">
-                <button type="button" class="btn btn-primary">{{ pageNumber }}</button>
-            </a>
-        </div> -->
+
+        <div class="row" id="plus">
+            <div class="button" @click="addPainting()"></div>
+            <!-- <button type="button" class="btn btn-primary" @click="addPainting()">sfoglia</button> -->
+        </div>
     </div>
 </template>
 
@@ -52,7 +51,7 @@ export default {
         return {
             paintings: [],
             pages: 0,
-            pageSize: 6,
+            pageSize: 10,
             currentPage: 1,
         }
     },
@@ -63,7 +62,7 @@ export default {
         loadData(pageNumber, pageSize) {
             PublicService.getGalleriesPaintings(pageNumber, pageSize).then(
                 response => {
-                    this.paintings = response.data.payload;
+                    this.paintings = [...this.paintings, ...response.data.payload];
                     if (this.paintings && this.paintings.length > 0) {
                         this.pages = this.paintings[0].totPages;
                     } else if (this.currentPage !== 1 && this.currentPage >= this.pages) {
@@ -75,6 +74,10 @@ export default {
                     console.log('Errore:', error);
                 }
             );
+        },
+        addPainting(){
+            this.currentPage ++;
+            this.loadData(this.currentPage - 1, this.pageSize);
         },
         handlePageLeft(pageNumber, pageSize) {
             // Chiamare i metodi che desideri al click
@@ -93,30 +96,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../../assets/style/variables.scss';
+
+#plus{
+    margin-top: 5px;
+}
+// .container{
+//     height: $mainHeight;
+// }
 .button{
-    background-color: rgb(228, 225, 225);
+    background-color: rgb(125, 121, 121);
     cursor: pointer;
-    &.right{
-        clip-path: polygon(20% 10%, 50% 50%, 20% 90%, 20% 90%, 34% 50%, 20% 10%);
-    }
+    clip-path: polygon(100% 50%, 50% 70%, 0 50%, 0 50%, 50% 59%, 100% 50%);
+    height: 50px;
+    width: 50px;
+    // &.right{
+    //     clip-path: polygon(20% 10%, 50% 50%, 20% 90%, 20% 90%, 34% 50%, 20% 10%);
+    // }
 }
 .gallery{
-    // padding: 10px 50px 0 50px;
-    // height: 80vh;
-    // .col{
-    //     height: 90%;
-    // }
+    height: 80%;
+    overflow: scroll;
 }
 .painting-card{
     // width: 100%;
-    height: 250px;
-    background-color: rgb(240, 237, 237);
-    border-radius: 10px;
-    padding: 15px;
+    // height: 250px;
+    // background-color: rgb(240, 237, 237);
+    // border-radius: 10px;
+    padding: 5px;
     img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+        // width: 100%;
+        height: 150px;
+        object-fit: cover;
+        overflow: hidden;
     }
 }
 
