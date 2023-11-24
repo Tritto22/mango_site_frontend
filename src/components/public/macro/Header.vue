@@ -54,11 +54,10 @@
 
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                                <!-- <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a> -->
-                                <h4 :class="{ 'nav-link': true, active: $route.path === '/' }"><router-link to="/">Home</router-link></h4>
-                                <h4 :class="{ 'nav-link': true, active: $route.path === '/galleries' }"><router-link to="/galleries">Gallery</router-link></h4>
-                                <h4 :class="{ 'nav-link': true, active: $route.path === '/about' }"><router-link to="/about">About</router-link></h4>
-                                <h4 :class="{ 'nav-link': true, active: $route.path === '/contact' }"><router-link to="/contact">Contact</router-link></h4>
+                                <h4 :class="{ 'nav-link': true, 'font-weight-bolder': $route.path === '/' }"><router-link to="/">Home</router-link></h4>
+                                <h4 :class="{ 'nav-link': true, 'font-weight-bolder': $route.path === '/galleries' }"><router-link to="/galleries">Gallery</router-link></h4>
+                                <h4 :class="{ 'nav-link': true, 'font-weight-bolder': $route.path === '/about' }"><router-link to="/about">About</router-link></h4>
+                                <h4 :class="{ 'nav-link': true, 'font-weight-bolder': $route.path === '/contact' }"><router-link to="/contact">Contact</router-link></h4>
                             </div>
                         </div>
                     </nav>
