@@ -1,25 +1,39 @@
 <template>
+    <!-- @mouseup="autoplay()" -->
     <div class="container-fluid">
-        <div v-if="slider.length > 1" class="slider" @mouseover="stopAutoplay()" @mouseleave="autoplay()">
+        <div v-if="slider.length > 1" class="slider">
             <div 
             v-for="(hero, i) in slider" :key="i" 
             class="hero" :class="[((i == position) ? 'active' : 'disable'), (!mouseHover ? 'effect' : '')]"
             >
-                <img class="myImg" v-if="hero.img != null" :src="hero.img" :key="i" :alt="hero.title">
+                <img class="myImg" v-if="hero.img != null" :src="hero.img" :key="i" :alt="hero.title" @mousedown="stopAutoplay()" @mouseup="autoplay()">
+                <!-- <img class="myImg" v-if="hero.img != null" :src="slider[0].img" :alt="slider[0]"> -->
+                <!-- <div v-if="hero.details != null">
+                    <div 
+                        v-for="(detail, i) in hero.details" :key="i"
+                        class="hero" :class="[((i == position) ? 'active' : 'disable'), (!mouseHover ? 'effect' : '')]"
+                    >
+                        <img class="myImg" :src="detail.linkImg" :alt="hero.title" >
+                    </div>
+                </div> -->
             </div>
         </div>
 
-        <div v-else class="d-flex justify-content-center">
-            <div class="loader"></div>
+        <div v-else>
+            <Loader/>
         </div>
     </div>
 </template>
 
 <script>
 import PublicService from '../../../services/public.service';
+import Loader from '../commons/Loader.vue';
 
 export default {
     name: "Home",
+    components: {
+        Loader
+    },
     data() {
         return {
             slider: [
@@ -36,7 +50,7 @@ export default {
                     "details": [
                         {
                             "name": null,
-                            "linkImg": null
+                            "linkImg": "http://drive.google.com/uc?export=view&id=1RkTyzlP1lBRtquazNEB3UGFQrM8BGYul"
                         }
                     ]
                 },
@@ -62,7 +76,7 @@ export default {
             }
         },
         autoplay: function () {
-            this.autoplayID = setInterval(this.right, 4999);
+            this.autoplayID = setInterval(this.right, 4860);
             this.mouseHover = false;
         },
         stopAutoplay: function () {
@@ -111,31 +125,23 @@ export default {
     display: none;
 }
 .slider{
-    height: 85vh;
-    background-color: #0000000f;
-    border-radius: 10px;
-    
+    // height: 82vh;
+    height: 80vh;
+    // background-color: #0000000f;
+    // border-radius: 10px;
     overflow: hidden;
     .hero{
         position: relative;
         transition: transform 0.5s ease;
+        cursor: pointer;
         .myImg{
-            width: auto;
-            height: 90%;
+            width: 95%;
+            height: auto;
+            // height: 1023px;
+            // position: relative;
+            // top: 15%;
             // object-fit: contain;
         }
     }
-}
-.loader{
-    margin-top: 25vh;
-    height: 100px;
-    width: 100px;
-    border-top: 5px solid red;
-    border-radius: 50%;
-    animation: loader 3s linear infinite;
-}
-@keyframes loader {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }
 </style>

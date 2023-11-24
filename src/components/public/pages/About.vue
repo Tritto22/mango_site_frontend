@@ -8,7 +8,7 @@
             </div>
 
             <div class="row">
-                <div class="col-8">
+                <div class="col-6">
                     <p>
                         Antonio Mango, originario di Tursi (comune in provincia di Matera), 
                         nasce a Stigliano (MT) nel 1993. Nel 2011 si diploma al Liceo Artistico 
@@ -29,8 +29,12 @@
                     </p>
                 </div>
 
-                <div class="col-4">
-                    <img id="profile-img" src="http://drive.google.com/uc?export=view&id=1rBcQ1aFHTVUiLTG0AYSS0TN4oRXobTkJ" alt="fotoProfilo">
+                <div class="col-6 d-flex justify-content-center" v-if="loading">
+                    <Loader/>
+                </div>
+
+                <div v-else class="col-6 d-flex justify-content-center">
+                    <img id="profile-img" :src="imageSrc" alt="fotoProfilo" >
                 </div>
             </div>
             
@@ -41,7 +45,7 @@
             </div>
 
             <div class="row">
-                <div class="col-11">
+                <div class="col-6">
                     <p>
                         Con il mio lavoro affronto tematiche di natura metafisica, 
                         talvolta legate all' introspezione. Facendo eco a una 
@@ -85,9 +89,19 @@
 </template>
 
 <script>
+import Loader from '../commons/Loader.vue';
+
 export default {
     name: "About",
-
+    data() {
+        return {
+            loading: true,
+            imageSrc: "http://drive.google.com/uc?export=view&id=1rBcQ1aFHTVUiLTG0AYSS0TN4oRXobTkJ"
+        };
+    },
+    components: {
+        Loader
+    },
     created() {
         this.setCookie();
     },
@@ -95,7 +109,16 @@ export default {
         setCookie() {
             // Imposta il cookie utilizzando JavaScript
             document.cookie = '__Host-GAPS=valoreDelCookie; secure; samesite=None';
-        }
+        },
+        // handleImageLoad() {
+        //     // Chiamato quando l'immagine è stata caricata con successo
+        //     this.loading = false;
+        // }
+    },
+    mounted: function () {
+        this.$nextTick(function () {
+            this.loading = false;
+        })
     }
 }
 </script>
@@ -103,14 +126,19 @@ export default {
 <style lang="scss" scoped>
 .container-fluid{
     padding: 25px 80px 0 80px !important;
+    background-color: rgba(31, 34, 31, 0.98);
+}
+h2,p{
+    color: #dfdfdf;
 }
 p{
     text-align: justify;
 }
 #profile-img{
-    width: 55%;;
+    width: 33%;;
     object-fit: contain;
     position: relative;
-    left: 20%;
+    left: 10%;
+    top: -10%;
 }
 </style>

@@ -91,6 +91,10 @@ export default {
                 },
                 error => {
                     console.log('Errore:', error);
+                    if (error.response && error.response.status === 403) {
+                        this.$store.dispatch('auth/logout');
+                        this.$router.push('/admin/login');
+                    }
                 }
             );
         },

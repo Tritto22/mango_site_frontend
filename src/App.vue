@@ -31,6 +31,12 @@ export default {
     AuthMain,
     // AuthFooter
   },
+  mounted() {
+    document.addEventListener('contextmenu', this.disableContextMenu);
+  },
+  beforeDestroy() {
+    document.removeEventListener('contextmenu', this.disableContextMenu);
+  },
   computed: {
     isPublicRoute() {
       return !this.$route.path.includes('/admin');
@@ -40,7 +46,11 @@ export default {
     logOut() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/admin/login');
-    }
+    },
+    // disableContextMenu(event) {
+    //   event.preventDefault();
+    //   alert('Function Disabled!');
+    // }
   }
 }
 </script>

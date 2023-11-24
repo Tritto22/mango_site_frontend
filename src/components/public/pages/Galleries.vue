@@ -1,12 +1,12 @@
 <template>
     <div class="container-fluid d-flex flex-column justify-content-between">
-        <div class="row">
+        <div class="row" v-if="paintings.length > 0">
             <div class="col-1 button left">
 
             </div>
 
             <div class="col-10 gallery">
-                <div class="row row-cols-3">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 align-items-center">
                     <div class="col p-3" v-for="painting, i in paintings" :key="i">
                         <div class="painting-card d-flex justify-content-center align-items-center">
                             <img :src="painting.img" :alt="painting.title">
@@ -18,6 +18,10 @@
             <div class="col-1 button right">
 
             </div>
+        </div>
+
+        <div v-else>
+            <Loader/>
         </div>
         <!-- <div class="row row-cols-3">
             <div class="col painting-card d-flex justify-content-center align-items-center" v-for="painting, i in paintings" :key="i">
@@ -37,9 +41,13 @@
 
 <script>
 import PublicService from '../../../services/public.service';
+import Loader from '../commons/Loader.vue';
 
 export default {
     name: "Galleries",
+    components: {
+        Loader
+    },
     data() {
         return {
             paintings: [],
@@ -68,7 +76,11 @@ export default {
                 }
             );
         },
-        handlePageClick(pageNumber, pageSize) {
+        handlePageLeft(pageNumber, pageSize) {
+            // Chiamare i metodi che desideri al click
+            this.getPageData(pageNumber, pageSize);
+        },
+        handlePageRight(pageNumber, pageSize) {
             // Chiamare i metodi che desideri al click
             this.getPageData(pageNumber, pageSize);
         },
@@ -81,13 +93,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .painting-card{
-//     padding: 20px;
-//     img{
-//         width: 100%;
-//         object-fit: contain;
-//     }
-// }
 .button{
     background-color: rgb(228, 225, 225);
     cursor: pointer;
@@ -96,17 +101,21 @@ export default {
     }
 }
 .gallery{
-    padding: 30px 50px 0 50px;
-
+    // padding: 10px 50px 0 50px;
+    // height: 80vh;
+    // .col{
+    //     height: 90%;
+    // }
 }
 .painting-card{
-    width: 100%;
+    // width: 100%;
     height: 250px;
     background-color: rgb(240, 237, 237);
     border-radius: 10px;
+    padding: 15px;
     img{
-        width: 90%;
-        height: 90%;
+        width: 100%;
+        height: 100%;
         object-fit: contain;
     }
 }

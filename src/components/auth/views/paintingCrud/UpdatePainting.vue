@@ -152,7 +152,7 @@ export default {
                         this.message = "Modifica avvenuta con successo!";
                         this.successful = true;
                     }else if(data.data.error != null){
-                        this.message = data.error.msg;
+                        this.message = data.data.error.msg;
                         this.successful = false;
                     }
                 },
@@ -162,6 +162,11 @@ export default {
                         error.message ||
                         error.toString();
                     this.successful = false;
+
+                    if (error.response && error.response.status === 403) {
+                        this.$store.dispatch('auth/logout');
+                        this.$router.push('/admin/login');
+                    }
                 }
             );
         },

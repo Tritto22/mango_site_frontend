@@ -14,7 +14,7 @@ export default {
 @import '../../../assets/style/global.scss';
 
 footer{
-    height: 6vh;
+    padding: 5px 10px 0 10px;
     .copyRight{
         font-size: 10px;
         text-align: center;
