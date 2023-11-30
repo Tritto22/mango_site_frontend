@@ -137,7 +137,7 @@ export default {
                     this.painting.details = null
                 }
             }
-            
+
             PaintingService.newPainting(this.painting).then(
                 data => {
                     if (data.data.payload != null) {
@@ -197,7 +197,6 @@ export default {
             reader.readAsDataURL(file);
         },
         handleFileChangeDetailImg(event, i) {
-            console.log(i);
             const fileInput = event.target;
             const file = fileInput.files[0];
             if (file) {

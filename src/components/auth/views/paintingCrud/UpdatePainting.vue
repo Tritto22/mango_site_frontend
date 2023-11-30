@@ -31,32 +31,39 @@
                                 <p class="text-danger" v-if="errors.img">{{ errors.img }}</p>
                             </div> -->
 
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label for="imageDataBytes" class="form-label">Link immagine quadro file</label>
+                                <div>
+                                    <img v-if="painting.imageDataBase64 != null" :src="painting.imageDataBase64" alt="" class="img-detail">
+                                </div>
                                 <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangePaintingImg">
                             </div>
 
-                            <!-- <div v-if="painting.details != null" class="mb-3">
+                            <div v-if="painting.details != null" class="mb-3">
                                 <div class="detail mb-2" v-for="detail, i in painting.details" :key="i">
                                     <label for="img" class="form-label">Link dettaglio quadro</label>
                                     <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + detail.name" placeholder="Inserisci il nome del dettaglio">
-                                    <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + detail.linkImg" placeholder="Inserisci il link del dettaglio">
-                                    <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangeDetailImg(i)">
+                                    <!-- <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + detail.linkImg" placeholder="Inserisci il link del dettaglio"> -->
+                                    <img v-if="painting.details[i].imageBase64 != null" :src="painting.details[i].imageBase64" alt="" class="img-detail">
+                                    <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangeDetailImg($event, i)">
+                                    <button type="button" class="btn btn-danger mt-3" @click="deleteDetail(i)">Rimuovi dettaglio</button>
                                     <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
                                 </div>
 
                                 <div v-if="countDetails > this.painting.details.length" class="mb-3">
                                     <div class="detail mb-2" v-for="i in countDetails" :key="i">
                                         <label for="img" class="form-label">Link dettaglio quadro</label>
-                                        <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + 'name'" placeholder="Inserisci il nome del dettaglio">
-                                        <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + 'linkImg'" placeholder="Inserisci il link del dettaglio">
-                                        <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangeDetailImg(i)">
+                                        <input class="form-control mb-1" v-model="painting.details[i-1].name" type="text" :id="i + 'name'" placeholder="Inserisci il nome del dettaglio">
+                                        <!-- <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + 'linkImg'" placeholder="Inserisci il link del dettaglio"> -->
+                                        <img v-if="painting.details[i-1].imageBase64 != null" :src="painting.details[i-1].imageBase64" alt="" class="img-detail">
+                                        <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangeDetailImg($event, i-1)">
+                                        <button type="button" class="btn btn-danger mt-3" @click="deleteDetail(i-1)">Rimuovi dettaglio</button>
                                         <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
                                     </div>
                                 </div>
 
                                 <button type="button" class="btn btn-info" @click="addDetail">Aggiungi dettaglio</button>
-                            </div> -->
+                            </div>
 
                             <div class="form-group mb-3">
                                 <label for="size" class="form-label">Misure</label>
@@ -144,6 +151,7 @@ export default {
             PaintingService.getSinglePainting(slug).then(
                 response => {
                     this.painting = response.data.payload;
+                    this.countDetails = this.painting.details.length;
                 },
                 error => {
                     console.log('Errore:', error);
@@ -228,6 +236,7 @@ export default {
             reader.readAsDataURL(file);
         },
         handleFileChangeDetailImg(event, i){
+            console.log(i);
             const fileInput = event.target;
             const file = fileInput.files[0];
 
@@ -235,19 +244,34 @@ export default {
                 this.readFileDetail(file, i);
             }
         },
-        readFileDetail(file) {
+        readFileDetail(file, i) {
             const reader = new FileReader();
 
-            reader.onload = (e, i) => {
+            reader.onload = (e) => {
                 // Ottieni il base64 dal risultato del FileReader
-                this.painting.details[i].imageDataBase64 = e.target.result;
+                this.painting.details[i].imageBase64 = e.target.result;
             };
 
             // Leggi il file come URL data (base64)
             reader.readAsDataURL(file);
+        },
+        deleteDetail(i){
+            this.painting.details.splice(i, 1)
+            this.countDetails--;
         }
     }
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.detail{
+    background-color: rgb(234, 234, 234);
+    border-radius: 10px;
+    padding: 20px;
+}
+.img-detail{
+    margin: 20px 0 20px 0;
+    height: 50px;
+    object-fit: contain;
+}
+</style>
