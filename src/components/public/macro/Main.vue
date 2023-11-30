@@ -17,6 +17,6 @@ main{
     padding-top: 10px;
     padding-bottom: 10px;
     height: $mainHeight;
-    overflow: scroll;
+    overflow: auto;
 }
 </style>

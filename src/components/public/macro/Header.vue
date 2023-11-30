@@ -80,7 +80,7 @@ export default {
 
 a{
     text-transform: uppercase;
-    font-family: 'Philosopher'; 
+    font-family: 'Philosopher' !important; 
     color: #868686 !important;
 }
 .logo{

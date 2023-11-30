@@ -13,26 +13,35 @@
                                     spazi!</p>
                             </div>
 
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="img" class="form-label">Link immagine quadro</label>
                                 <input class="form-control" v-model="painting.img" type="text" id="img"
                                     placeholder="Inserisci il link dell'immagine">
                                 <p class="text-danger" v-if="errors.img">{{ errors.img }}</p>
+                            </div> -->
+
+<!-- ******************** File immagini ********************************************** -->
+
+                            <div class="form-group">
+                                <label for="imageDataBytes" class="form-label">Link immagine quadro file</label>
+                                <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChange">
                             </div>
 
-                            <div class="mb-3">
-                                <div class="first-detail mb-2">
-                                    <label for="img" class="form-label">Link dettaglio quadro</label>
-                                    <input class="form-control mb-1" v-model="painting.details[0].name" type="text" :id="0 + 'name'" placeholder="Inserisci il nome del dettaglio">
-                                    <input class="form-control" v-model="painting.details[0].linkImg" type="text" :id="0 + 'linkImg'" placeholder="Inserisci il link del dettaglio">
-                                    <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
-                                </div>
+<!-- ******************** End file immagini ********************************************** -->
 
-                                <div v-if="countDetails >= 1" class="mb-3">
+                            <div class="mb-3">
+                                <!-- <div class="first-detail mb-2">
+                                    <label for="0" class="form-label">Link dettaglio quadro</label>
+                                    <input class="form-control mb-1" v-model="painting.details[0].name" type="text" id="0" placeholder="Inserisci il nome del dettaglio">
+                                    <input type="file" class="form-control-file" id="0" @change="handleFileChangeDetailImg($event, 0)">
+                                    <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
+                                </div> -->
+
+                                <div v-if="countDetails > 0" class="mb-3">
                                     <div class="detail mb-2" v-for="i in countDetails" :key="i">
-                                        <label for="img" class="form-label">Link dettaglio quadro</label>
-                                        <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + 'name'" placeholder="Inserisci il nome del dettaglio">
-                                        <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + 'linkImg'" placeholder="Inserisci il link del dettaglio">
+                                        <label for="i" class="form-label">Link dettaglio quadro</label>
+                                        <input class="form-control mb-1" v-model="painting.details[i-1].name" type="text" :id="i" placeholder="Inserisci il nome del dettaglio">
+                                        <input type="file" class="form-control-file" :id="i" @change="handleFileChangeDetailImg($event, i-1)">
                                         <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
                                     </div>
                                 </div>
@@ -99,9 +108,9 @@ export default {
         return {
             painting: {
                 favorite: false,
-                img: 'http://drive.google.com/uc?export=view&id=',
-                details: [{}]
+                details: []
             },
+            imageDataBytes: null,
             successful: false,
             submitted: false,
             message: '',
@@ -123,6 +132,12 @@ export default {
     methods: {
         addPainting() {
             this.submitted = true;
+            console.log("nome      "+this.painting.details[0].name);
+            console.log("file      " + this.painting.details[0].imageBase64);
+            if(this.painting.details[0].name == null && this.painting.details[0].imageBase64 == null){
+                this.painting.details = null
+            }
+            console.log(this.painting.details);
             PaintingService.newPainting(this.painting).then(
                 data => {
                     if (data.data.payload != null) {
@@ -161,6 +176,44 @@ export default {
         addDetail(){
             this.countDetails ++;
             this.painting.details.push({});
+        },
+        handleFileChange(event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+
+            if (file) {
+                this.readFile(file);
+            }
+        },
+        readFile(file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                // Ottieni il base64 dal risultato del FileReader
+                this.painting.imageDataBase64 = e.target.result;
+            };
+
+            // Leggi il file come URL data (base64)
+            reader.readAsDataURL(file);
+        },
+        handleFileChangeDetailImg(event, i) {
+            console.log(i);
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+            if (file) {
+                this.readFileDetail(file, i);
+            }
+        },
+        readFileDetail(file, i) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                // Ottieni il base64 dal risultato del FileReader
+                this.painting.details[i].imageBase64 = e.target.result;
+            };
+
+            // Leggi il file come URL data (base64)
+            reader.readAsDataURL(file);
         }
     }
 }

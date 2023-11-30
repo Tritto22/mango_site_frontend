@@ -104,7 +104,7 @@ export default {
 .effect{
     position: absolute;
     // animation: sliderInOut 5s ease-in-out;
-    animation: fadeIn 1s, fadeOut 1s 4.7s;
+    animation: fadeIn 1.5s, fadeOut 1.5s 3.6s;
 }
 // @keyframes sliderInOut{
 //     0% {left: 100%; top: 50%; transform: translate(100%, -50%);}
@@ -114,12 +114,12 @@ export default {
 //     100% {left: 0%; top: 50%; transform: translate(-100%, -50%);}
 // }
 @keyframes fadeIn {
-    from {opacity: 0.4}
+    from {opacity: 0}
     to {opacity: 1}
 }
 @keyframes fadeOut {
     from {opacity: 1}
-    to {opacity: 0.4}
+    to {opacity: 0}
 }
 .disable{
     display: none;

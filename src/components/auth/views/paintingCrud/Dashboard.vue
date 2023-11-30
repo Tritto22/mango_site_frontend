@@ -87,7 +87,6 @@ export default {
                     }else if (this.currentPage !== 1 && this.currentPage >= this.pages) {
                         this.getPageData(this.currentPage - 1, this.pageSize);
                     }
-                    
                 },
                 error => {
                     console.log('Errore:', error);
@@ -112,8 +111,8 @@ export default {
         },
         // passaggio dati tramite vuex e params
         shareData(data, routeName) {
-            this.$store.commit('painting/setSelectedPainting', data);
-            localStorage.setItem('selectedPainting', JSON.stringify(data));
+            // this.$store.commit('painting/setSelectedPainting', data);
+            // localStorage.setItem('selectedPainting', JSON.stringify(data));
             this.$router.push({
                 name: routeName,
                 params: { 

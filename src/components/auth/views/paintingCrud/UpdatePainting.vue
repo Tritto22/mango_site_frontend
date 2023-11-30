@@ -25,17 +25,23 @@
                                 <p class="text-danger" v-if="!isTitleValid">Il titolo non può essere vuoto o contenere solo spazi!</p>
                             </div>
 
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="img" class="form-label">Link immagine quadro</label>
                                 <input class="form-control" v-model="painting.img" type="text" id="img" placeholder="Inserisci il link dell'immagine">
                                 <p class="text-danger" v-if="errors.img">{{ errors.img }}</p>
+                            </div> -->
+
+                            <div class="form-group">
+                                <label for="imageDataBytes" class="form-label">Link immagine quadro file</label>
+                                <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangePaintingImg">
                             </div>
 
-                            <div v-if="painting.details != null" class="mb-3">
+                            <!-- <div v-if="painting.details != null" class="mb-3">
                                 <div class="detail mb-2" v-for="detail, i in painting.details" :key="i">
                                     <label for="img" class="form-label">Link dettaglio quadro</label>
                                     <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + detail.name" placeholder="Inserisci il nome del dettaglio">
                                     <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + detail.linkImg" placeholder="Inserisci il link del dettaglio">
+                                    <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangeDetailImg(i)">
                                     <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
                                 </div>
 
@@ -44,12 +50,13 @@
                                         <label for="img" class="form-label">Link dettaglio quadro</label>
                                         <input class="form-control mb-1" v-model="painting.details[i].name" type="text" :id="i + 'name'" placeholder="Inserisci il nome del dettaglio">
                                         <input class="form-control" v-model="painting.details[i].linkImg" type="text" :id="i + 'linkImg'" placeholder="Inserisci il link del dettaglio">
+                                        <input type="file" class="form-control-file" id="imageDataBytes" @change="handleFileChangeDetailImg(i)">
                                         <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
                                     </div>
                                 </div>
 
                                 <button type="button" class="btn btn-info" @click="addDetail">Aggiungi dettaglio</button>
-                            </div>
+                            </div> -->
 
                             <div class="form-group mb-3">
                                 <label for="size" class="form-label">Misure</label>
@@ -118,21 +125,11 @@ export default {
     computed: {
         currentUser() {
             return this.$store.state.auth.user;
-        },
-        currentPainting() {
-            return this.$store.state.painting.selectedPainting;
         }
     },
     created() {
-        // prendo dati da params o Vuex
-        // Se non c'è alcun painting selezionato nel Vuex, cerca nel localStorage
-        
-        if (this.currentPainting != null) {
-            this.painting = this.currentPainting;
-            this.countDetails = this.painting.details.length;
-        } else if(this.$route.params.data != null) {
-            this.painting = this.$route.params.data;
-            this.countDetails = this.painting.details.length;
+        if (this.$route.params.slug != null) {
+            this.loadData(this.$route.params.slug);
         } else {
             this.errorProp = true;
         }
@@ -143,6 +140,20 @@ export default {
         } 
     },   
     methods: {
+        loadData(slug) {
+            PaintingService.getSinglePainting(slug).then(
+                response => {
+                    this.painting = response.data.payload;
+                },
+                error => {
+                    console.log('Errore:', error);
+                    if (error.response && error.response.status === 403) {
+                        this.$store.dispatch('auth/logout');
+                        this.$router.push('/admin/login');
+                    }
+                }
+            )
+        },
         editPainting() {
             this.submitted = true;
             this.errorProp = false;
@@ -196,6 +207,44 @@ export default {
         addDetail() {
             this.countDetails++;
             this.painting.details.push({});
+        },
+        handleFileChangePaintingImg(event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+
+            if (file) {
+                this.readFilePainting(file);
+            }
+        },
+        readFilePainting(file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                // Ottieni il base64 dal risultato del FileReader
+                this.painting.imageDataBase64 = e.target.result;
+            };
+
+            // Leggi il file come URL data (base64)
+            reader.readAsDataURL(file);
+        },
+        handleFileChangeDetailImg(event, i){
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+
+            if (file) {
+                this.readFileDetail(file, i);
+            }
+        },
+        readFileDetail(file) {
+            const reader = new FileReader();
+
+            reader.onload = (e, i) => {
+                // Ottieni il base64 dal risultato del FileReader
+                this.painting.details[i].imageDataBase64 = e.target.result;
+            };
+
+            // Leggi il file come URL data (base64)
+            reader.readAsDataURL(file);
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex flex-column justify-content-center align-items-center">
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
         <div class="row justify-content-center align-items-center flex-column gallery" v-if="paintings.length > 0">
             <!-- <div class="col-1 button left">
 
@@ -116,7 +116,9 @@ export default {
 }
 .gallery{
     height: 80%;
-    overflow: scroll;
+    overflow: auto;
+    background-color: #232623;
+    padding: 10px;
 }
 .painting-card{
     // width: 100%;
@@ -125,10 +127,15 @@ export default {
     // border-radius: 10px;
     padding: 5px;
     img{
+        width: 400px;
         // width: 100%;
-        height: 150px;
+        height: 400px;
         object-fit: cover;
         overflow: hidden;
+        cursor: pointer;
+        &:hover{
+            filter: saturate(30%); 
+        }
     }
 }
 
