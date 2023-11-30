@@ -12,7 +12,7 @@ class PaintingService {
         ) {
             return axios.post(API_URL + 'addPainting', painting, { headers: authHeader()});
         } else {
-            return Promise.reject("I dati del quadro non sono validi.");
+            return Promise.reject("I dati del quadro non sono validi. Il titolo e l'anno non possono essere vuoti.");
         }
     }
 

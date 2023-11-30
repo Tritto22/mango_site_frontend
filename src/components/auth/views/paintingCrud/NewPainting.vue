@@ -37,7 +37,7 @@
                                     <p class="text-danger" v-if="errors.details">{{ errors.details }}</p>
                                 </div> -->
 
-                                <div v-if="countDetails > 0" class="mb-3">
+                                <div v-if="countDetails > 0 && painting.details.length > 0" class="mb-3">
                                     <div class="detail mb-2" v-for="i in countDetails" :key="i">
                                         <label for="i" class="form-label">Link dettaglio quadro</label>
                                         <input class="form-control mb-1" v-model="painting.details[i-1].name" type="text" :id="i" placeholder="Inserisci il nome del dettaglio">
@@ -132,12 +132,12 @@ export default {
     methods: {
         addPainting() {
             this.submitted = true;
-            console.log("nome      "+this.painting.details[0].name);
-            console.log("file      " + this.painting.details[0].imageBase64);
-            if(this.painting.details[0].name == null && this.painting.details[0].imageBase64 == null){
-                this.painting.details = null
+            if(this.painting.details.length > 0){
+                if (this.painting.details[0].name == null && this.painting.details[0].imageBase64 == null) {
+                    this.painting.details = null
+                }
             }
-            console.log(this.painting.details);
+            
             PaintingService.newPainting(this.painting).then(
                 data => {
                     if (data.data.payload != null) {
