@@ -96,7 +96,7 @@ export default {
     data() {
         return {
             loading: true,
-            imageSrc: "http://drive.google.com/uc?export=view&id=1rBcQ1aFHTVUiLTG0AYSS0TN4oRXobTkJ"
+            imageSrc: require("../../../assets/img/fotoProfilo.jpg")
         };
     },
     components: {
@@ -124,6 +124,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../../assets/style/global.scss';
 .container-fluid{
     padding: 25px 80px 0 80px !important;
     background-color: rgba(31, 34, 31, 0.98);

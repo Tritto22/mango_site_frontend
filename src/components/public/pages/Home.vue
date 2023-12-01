@@ -6,7 +6,7 @@
             v-for="(hero, i) in slider" :key="i" 
             class="hero" :class="[((i == position) ? 'active' : 'disable'), (!mouseHover ? 'effect' : '')]"
             >
-                <img class="myImg" v-if="hero.img != null" :src="hero.img" :key="i" :alt="hero.title" @mousedown="stopAutoplay()" @mouseup="autoplay()">
+                <img class="myImg" v-if="hero.imageDataBase64 != null" :src="hero.imageDataBase64" :key="i" :alt="hero.title" @mousedown="stopAutoplay()" @mouseup="autoplay()">
             </div>
         </div>
 
@@ -27,25 +27,18 @@ export default {
     },
     data() {
         return {
-            slider: [
-                {
-                    "title": "Quadro slider",
-                    "img": "http://drive.google.com/uc?export=view&id=1RkTyzlP1lBRtquazNEB3UGFQrM8BGYul",
-                    "size": "100x100",
-                    "year": 2022,
-                    "tecnique": "Olio",
-                    "description": "quadro sintesi",
-                    "slug": "quadro-slider",
-                    "totPages": 1,
-                    "favorite": true,
-                    "details": [
-                        {
-                            "name": null,
-                            "linkImg": "http://drive.google.com/uc?export=view&id=1RkTyzlP1lBRtquazNEB3UGFQrM8BGYul"
-                        }
-                    ]
-                },
-            ],
+            slider: [],
+            firstPaintingSlider: {
+                "title": "Quadro slider",
+                "imageDataBase64": require("../../../assets/img/slider/quadroSlider.jpg"),
+                "size": "100x100",
+                "year": 2022,
+                "tecnique": "Olio",
+                "description": "quadro sintesi",
+                "slug": "quadro-slider",
+                "totPages": 1,
+                "favorite": true,
+            },
             position: 0,
             autoplayID: null,
             mouseHover: false,
@@ -79,6 +72,7 @@ export default {
         PublicService.getSliderPaintings().then(
             response => {
                 this.slider = [...this.slider, ...response.data.payload];
+                this.slider.splice(0, 0, this.firstPaintingSlider);
             },
             error => {
                 console.log('Errore:', error);
