@@ -29,15 +29,21 @@
                         <div class="row">
                             <div class="col-lg-10 col-md-12">
                                 <div class="painting-single d-flex justify-content-center align-items-center">
-                                    <img :src="singlePainting.imageDataBase64" :alt="singlePainting.title">
+                                    <img v-if="viewMainPainting" :src="singlePainting.imageDataBase64" :alt="singlePainting.title">
+                                    <img v-else :src="currentDetail.imageBase64" :alt="currentDetail.name">
                                 </div>
 
-                                <h4>Informazioni</h4>
-                                <ul>
-                                    <li>Dimensioni: {{ singlePainting.size }}</li>
-                                    <li>Tecnica: {{ singlePainting.tecnique }}</li>
-                                    <li>Anno: {{ singlePainting.year }}</li>
-                                </ul>
+                                <div class="info mt-5">
+                                    <h4>Informazioni</h4>
+
+                                    <ul>
+                                        <li>Titolo: {{ singlePainting.title }}</li>
+                                        <li>Dimensioni: {{ singlePainting.size }}</li>
+                                        <li>Tecnica: {{ singlePainting.tecnique }}</li>
+                                        <li>Anno: {{ singlePainting.year }}</li>
+                                    </ul>
+                                    <button @click="viewPaintingGallery">Gallery</button>
+                                </div>
                             </div>
 
                             <div class="row md-down-screen d-flex w-100">
@@ -53,7 +59,7 @@
                                 <div class="mini-painting-container">
                                     <h4>Quadro</h4>
                                     <div class="mini-painting-md">
-                                        <img :src="singlePainting.imageDataBase64" :alt="singlePainting.title" @click="viewSinglePainting(detail)">
+                                        <img :src="singlePainting.imageDataBase64" :alt="singlePainting.title" @click="viewMainPaintingFn">
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +76,7 @@
 
                                 <h4>Quadro</h4>
                                 <div class="mini-painting d-flex justify-content-center align-items-center">
-                                    <img :src="singlePainting.imageDataBase64" :alt="singlePainting.title" @click="viewSinglePainting(detail)">
+                                    <img :src="singlePainting.imageDataBase64" :alt="singlePainting.title" @click="viewMainPaintingFn">
                                 </div>
                             </div>
                         </div>
@@ -114,6 +120,8 @@ export default {
             singlePainting:{},
             showPaintingGallery: true,
             showSinglePainting: false,
+            viewMainPainting: true,
+            currentDetail:{}
         }
     },
     created() {
@@ -161,6 +169,13 @@ export default {
             this.singlePainting = {};
             this.showPaintingGallery = true;
             this.showSinglePainting = false;
+        },
+        viewMainPaintingFn(){
+            this.viewMainPainting = true;
+        },
+        viewSingleDetail(detail){
+            this.currentDetail = detail;
+            this.viewMainPainting = false;
         }
     }
 }
@@ -256,7 +271,7 @@ export default {
     padding: 25px;
     background-color: gray;
     .painting-single{
-        height: 77vh;
+        // height: 77vh;
         width: 100%;
         background: aliceblue;
         img{
@@ -266,7 +281,7 @@ export default {
         }
     }
     .details-container{
-        height: 60vh;
+        max-height: 58vh;
         overflow: auto;
     }
     .body-details{
