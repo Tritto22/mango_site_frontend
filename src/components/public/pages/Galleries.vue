@@ -42,12 +42,12 @@
                                         <li>Tecnica: {{ singlePainting.tecnique }}</li>
                                         <li>Anno: {{ singlePainting.year }}</li>
                                     </ul>
-                                    <button @click="viewPaintingGallery">Gallery</button>
+                                    <button id="btn-gallery" @click="viewPaintingGallery">Gallery</button>
                                 </div>
                             </div>
 
                             <div class="row md-down-screen d-flex w-100">
-                                <div v-if="singlePainting.details != null" class="details-container-md">
+                                <div v-if="singlePainting.details != null && singlePainting.details.length>0" class="details-container-md">
                                     <h4>Dettagli</h4>
                                     <div class="body-details-md d-flex flex-wrap">
                                         <div class="details-md" v-for="detail, i in singlePainting.details" :key="i">
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="col-lg-2 lg-up-screen">
-                                <div v-if="singlePainting.details != null" class="details-container">
+                                <div v-if="singlePainting.details != null && singlePainting.details.length > 0" class="details-container">
                                     <h4 id="titolo-dettagli">Dettagli</h4>
                                     <div class="body-details">
                                         <div class="details d-flex justify-content-center align-items-center" v-for="detail, i in singlePainting.details" :key="i">
@@ -182,6 +182,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../../assets/style/global.scss';
 @import '../../../assets/style/variables.scss';
 
 
@@ -204,15 +205,24 @@ export default {
     }
 }
 
+#btn-gallery{
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 10px 0;
+    background-color: #454945;
+    color: $whiteText;
+}
 
 #plus{
     margin-top: 5px;
 }
 #titolo-dettagli{
-    position: fixed;
-    background-color: gray;
+    position: sticky;
+    top: 0;
+    background-color: $backgroundColor;
     z-index: 3;
     width: 100%;
+    padding-bottom: 5px;
 }
 // .container{
 //     height: $mainHeight;
@@ -228,12 +238,13 @@ export default {
     // }
 }
 .container-fluid{
-    background-color: #232623;
+    background-color: $backgroundColor;
+    color: $whiteText;
 }
 .gallery{
     // height: 80%;
     overflow: auto;
-    background-color: #232623;
+    background-color: $backgroundColor;
     padding: 10px;
 }
 .painting-card{
@@ -269,11 +280,12 @@ export default {
     min-height: 100vh;
     margin: 0;
     padding: 25px;
-    background-color: gray;
+    background-color: $backgroundColor;
     .painting-single{
         // height: 77vh;
         width: 100%;
-        background: aliceblue;
+        background: #292929;
+        border-radius: 10px;
         img{
             height: 400px;
             max-width: 100%;
@@ -285,7 +297,7 @@ export default {
         overflow: auto;
     }
     .body-details{
-        margin-top: 35px;
+        margin-top: 10px;
         .details{
             margin-bottom: 10px;
             img{

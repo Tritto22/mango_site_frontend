@@ -1,7 +1,7 @@
 <template>
     <!-- @mouseup="autoplay()" -->
     <div class="container-fluid">
-        <div v-if="slider.length > 1" class="slider">
+        <div v-if="slider.length > 0" class="slider">
             <div 
             v-for="(hero, i) in slider" :key="i" 
             class="hero" :class="[((i == position) ? 'active' : 'disable'), (!mouseHover ? 'effect' : '')]"

@@ -19,7 +19,7 @@
                 </div>
             </div> -->
             <div class="col logo-card">
-                    <a href="mailto:tuoindirizzoemail@example.com?subject=Richiesta di contatto&body=Ciao%20%2C%0A%0AVorrei%20contattarvi%20per%20...">
+                    <a href="mailto:tritto.simone@gmail.com?subject=Richiesta di contatto&body=Ciao%20%2C%0A%0AVorrei%20contattarti%20per%20...">
                         <img class="logo" src="../../../assets/img/contactLogo/mail.png" alt="mail">
                     </a>
                 </div>
