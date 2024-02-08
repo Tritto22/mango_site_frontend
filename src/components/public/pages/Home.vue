@@ -30,7 +30,7 @@ export default {
             slider: [],
             firstPaintingSlider: {
                 "title": "Quadro slider",
-                "imageDataBase64": require("../../../assets/img/slider/quadroSlider.jpg"),
+                "imageDataBase64": require("../../../assets/img/slider/gioconda.jpg"),
                 "size": "100x100",
                 "year": 2022,
                 "tecnique": "Olio",
@@ -125,9 +125,13 @@ export default {
         position: relative;
         transition: transform 0.5s ease;
         cursor: pointer;
+        background-color: #868686;
+        border-radius: 10px;
         .myImg{
-            width: 95%;
-            height: auto;
+            //width: 95%;
+            //height: auto;
+            width: auto;
+            height: 95%;
         }
     }
 }

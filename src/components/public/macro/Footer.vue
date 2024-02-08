@@ -1,6 +1,7 @@
 <template>
     <footer class="d-flex align-items-center justify-content-center">
-        <p class="copyRight">All images © AntonioMango</p>
+        <!-- <p class="copyRight">All images © AntonioMango</p> -->
+        <p class="copyRight">All images © LeonardoDaVinci</p>
     </footer>
 </template>
 

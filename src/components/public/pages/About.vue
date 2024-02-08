@@ -9,7 +9,7 @@
 
             <div class="row">
                 <div class="col-6">
-                    <p>
+                    <!-- <p>
                         Antonio Mango, originario di Tursi (comune in provincia di Matera), 
                         nasce a Stigliano (MT) nel 1993. Nel 2011 si diploma al Liceo Artistico 
                         Statale “Carlo Levi” di Matera. Continua la sua formazione artistica 
@@ -26,6 +26,9 @@
                         Rembrandt e Henri Bergson guidata dal professore e storico dell'arte 
                         Marco Bussagli. 
                         Attualmente vive e lavora a Roma.
+                    </p> -->
+                    <p>
+                        Leonardo ha svolto la sua attività a cavallo di due secoli, il 1400 e il 1500, e proprio in questo sta la sua peculiarità: spesso gli è stato riconosciuto il merito di essere colui che, sintetizzando i caratteri della cultura quattrocentesca, ha posto le basi per una nuova impostazione nel Cinquecento, un secolo sconvolto da grandi avvenimenti religiosi e politici. La sua grande curiosità è stata sempre accompagnata da un grande desiderio di concretizzare le sue conoscenze: scienza e pratica erano quindi indissolubili.
                     </p>
                 </div>
 
@@ -40,13 +43,14 @@
             
             <div class="row">
                 <div class="col">
-                    <h2>Artist Statement</h2>
+                    <!-- <h2>Artist Statement</h2> -->
+                    <h2>Opere</h2>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-6">
-                    <p>
+                    <!-- <p>
                         Con il mio lavoro affronto tematiche di natura metafisica, 
                         talvolta legate all' introspezione. Facendo eco a una 
                         certa filosofia dell'immanenza, la mia ricerca pittorica 
@@ -81,6 +85,9 @@
                         prescindere, da un lato, dalla qualità data dalla 
                         ricercatezza tecnica, e dall'altro, dalla qualità estetica 
                         legata ai segreti del potere dell'immagine.
+                    </p> -->
+                    <p>
+                        Di Leonardo scrittore si trova una curiosa testimonianza nelle sue "Favole", una raccolta di brevi componimenti che, mescolando arguzia e dottrina, nascondono un serio ammonimento: la farfalla che attratta dallo splendore del lume si brucia, la scimmia che si innamora dell’uccellino e lo soffoca di baci, l’asino che addormentandosi sul ghiaccio lo fonde e annega. Tutti i componimenti sembrano ricordare la tragedia dell’ignoranza dell’uomo sulle leggi naturali. Grande importanza ha per Leonardo il rapporto tra scienza e arte: partendo da una concezione quattrocentesca, Leonardo ha fatto della produzione artistica lo specchio della natura, che deve essere studiata e indagata a fondo per essere degnamente rappresentata. Da qui la sua dedizione per gli studi di botanica, anatomia e in particolare ottica, dove l’occhio è considerato come tramite tra l’immagine e l’anima.
                     </p>
                 </div>
             </div>        
@@ -96,7 +103,7 @@ export default {
     data() {
         return {
             loading: true,
-            imageSrc: require("../../../assets/img/fotoProfilo.jpg")
+            imageSrc: require("../../../assets/img/imgProfilo.jpg")
         };
     },
     components: {

@@ -38,7 +38,7 @@
                 <div class="col d-flex justify-content-center">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <router-link to="/" class="navbar-brand logo">
-                            Antonio Mango
+                            Leonardo Da Vinci
                         </router-link>
 
                         <button class="navbar-toggler" 
