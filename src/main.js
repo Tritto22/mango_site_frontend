@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router';
 import store from './store';
-import axios from 'axios';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import VeeValidate from 'vee-validate';
@@ -19,10 +18,6 @@ import {
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
 library.add(faHome, faUser, faUserPlus, faSignInAlt, faSignOutAlt, fasStar, farStar);
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-axios.defaults.withCredentials = true;
-axios.defaults.crossDomain = true;
 Vue.config.productionTip = false;
 
 Vue.use(VeeValidate);

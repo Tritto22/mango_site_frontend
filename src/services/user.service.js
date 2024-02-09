@@ -2,6 +2,10 @@ import axios from 'axios';
 import authHeader from './auth-header';
 
 const API_URL = 'https://www.simonetritto.site/api/user/';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+axios.defaults.withCredentials = true;
+axios.defaults.crossDomain = true;
 
 class UserService {
     // getPublicContent() {
