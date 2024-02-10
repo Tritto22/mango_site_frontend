@@ -32,11 +32,11 @@
                     </p>
                 </div>
 
-                <div class="col-6 d-flex justify-content-center" v-if="loading">
+                <div class="col-lg-6 col-sm-12 d-flex justify-content-center" v-if="loading">
                     <Loader/>
                 </div>
 
-                <div v-else class="col-6 d-flex justify-content-center">
+                <div v-else class="col-lg-6 col-sm-12 d-flex justify-content-center p-5">
                     <img id="profile-img" :src="imageSrc" alt="fotoProfilo" >
                 </div>
             </div>
@@ -145,8 +145,8 @@ p{
 #profile-img{
     width: 33%;;
     object-fit: contain;
-    position: relative;
-    left: 10%;
-    top: -10%;
+    //position: relative;
+    //left: 10%;
+    //top: -10%;
 }
 </style>
