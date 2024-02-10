@@ -10,7 +10,7 @@ Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
-    base: 'https://tritto22.github.io/mango_site_frontend',
+    base: process.env.BASE_URL,
     routes: [
         // ****************************** PUBLIC PATH ***********************************
         {
