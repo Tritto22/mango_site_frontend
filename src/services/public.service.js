@@ -5,6 +5,7 @@ const API_URL = 'https://www.simonetritto.site/api/public/';
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+axios.defaults.withCredentials = false;
 axios.defaults.crossDomain = true;
 class PublicService {
     getSliderPaintings(){
