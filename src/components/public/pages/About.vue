@@ -8,7 +8,7 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <!-- <p>
                         Antonio Mango, originario di Tursi (comune in provincia di Matera), 
                         nasce a Stigliano (MT) nel 1993. Nel 2011 si diploma al Liceo Artistico 
@@ -49,7 +49,7 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <!-- <p>
                         Con il mio lavoro affronto tematiche di natura metafisica, 
                         talvolta legate all' introspezione. Facendo eco a una 
