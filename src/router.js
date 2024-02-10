@@ -100,6 +100,10 @@ const router = new Router({
             path: '/admin/new-painting/create',
             name: 'admin-painting-create',
             component: () => import('./components/auth/views/paintingCrud/NewPainting.vue'),
+        },
+        {
+            path: '*',
+            redirect: '/'
         }
     ]
 });
